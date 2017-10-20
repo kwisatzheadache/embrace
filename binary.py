@@ -11,4 +11,4 @@ kfold = KFold(n_splits=10, random_state=7)
 model = LogisticRegression()
 scoring = 'accuracy'
 results = cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
-print("Accuracy: %.3f (%.3f") % (results.mean(), results.std())
+print("Accuracy: %.6f (%.6f)") % (results.mean(), results.std())

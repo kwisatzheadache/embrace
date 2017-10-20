@@ -61,15 +61,19 @@ def lag(variable, window):
     return df1.iloc[window:]
 
 
-# Convert arrays to df's in preparation for lagging
-df_walk = DataFrame(walk_combined)
-df_stand_sit = DataFrame(stand_sit_combined)
+# Convert arrays to df's and remove nan's in preparation for lagging
+df_walk = DataFrame(walk_combined).dropna()
+df_stand_sit = DataFrame(stand_sit_combined).dropna()
 
 # Only lag the xyz data, not the id or the y data
 cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z', 'y']
 df_walk.columns = cols
 df_stand_sit.columns = cols
 
+
+"""
+Separate this into a different file? So it can be called in the window loop
+"""
 # Function receives the df, xyz columns, and a window size; returns a new df with xyz lagged
 # according to window size, with id and y untouched.
 def lag_set(df, lag_variables, window):
@@ -80,14 +84,16 @@ def lag_set(df, lag_variables, window):
         df1[cols] = lagged
     return df1[:][window:]
 
-to_lag = cols[1:-1]
-window = 10
+# to_lag = cols[1:-1]
+# window = 10
 
 # Create lagged dataframes for walk and stand_sit
-lagged_walk = lag_set(df_walk, to_lag, window)
-lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
+# lagged_walk = lag_set(df_walk, to_lag, window)
+# lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
 
-lagged_complete = concat([lagged_walk, lagged_stand_sit])
-walk_bin = DataFrame(lagged_complete.dropna())
+# lagged_complete = concat([lagged_walk, lagged_stand_sit])
+
+# # remove missing data for binary classification
+# walk_bin = DataFrame(lagged_complete)
 
 
