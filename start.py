@@ -84,16 +84,4 @@ def lag_set(df, lag_variables, window):
         df1[cols] = lagged
     return df1[:][window:]
 
-# to_lag = cols[1:-1]
-# window = 10
-
-# Create lagged dataframes for walk and stand_sit
-# lagged_walk = lag_set(df_walk, to_lag, window)
-# lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
-
-# lagged_complete = concat([lagged_walk, lagged_stand_sit])
-
-# # remove missing data for binary classification
-# walk_bin = DataFrame(lagged_complete)
-
-
+to_lag = cols[1:-1]

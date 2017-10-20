@@ -10,4 +10,4 @@ def test_window(top, increment):
         execfile('binary.py')
         print("Window: %f" % window)
         acc_score.append({'window': window, 'accuracy': [results.mean(), results.std()]})
-    return acc_score
+    return np.array(acc_score)
