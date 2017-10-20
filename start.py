@@ -22,6 +22,7 @@ Perhaps the easiest place to start is just to label walk1 and walk2 as 1, and st
 train a binary classifier to recognize walking. I think I'll do that.
 """
 
+# Append the walk datasets
 # Create the label variable and append it to the data
 walk_both = np.vstack([walk1, walk2])
 walk_y = []
@@ -59,19 +60,30 @@ def lag(variable, window):
     df1.columns = columns
     return df1.iloc[window:]
 
+
+# Convert arrays to df's in preparation for lagging
 df_walk = DataFrame(walk_combined)
 df_stand_sit = DataFrame(stand_sit_combined)
 
+# Only lag the xyz data, not the id or the y data
 cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z', 'y']
 df_walk.columns = cols
 df_stand_sit.columns = cols
 
-def lag_set(df, window):
-    for column in df:
+# Function receives the df, xyz columns, and a window size; returns a new df with xyz lagged
+# according to window size, with id and y untouched.
+def lag_set(df, lag_variables, window):
+    df1 = DataFrame(df[['id', 'y']])
+    for column in lag_variables:
         lagged = lag(df[column], window)
         cols = lagged.columns
-        print df[cols]
-        # df[cols] = lagged
+        df1[cols] = lagged
+    return df1[:][window:]
 
 to_lag = cols[1:-1]
 window = 10
+
+lagged_walk = lag_set(df_walk, to_lag, window)
+lagged_stand_sit = lag_set(df_walk, to_lag, window)
+
+lagged_complete = concat([lagged_walk, lagged_stand_sit])
