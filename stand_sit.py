@@ -3,7 +3,6 @@ import numpy as np
 from pandas import DataFrame
 from pandas import concat
 from sklearn.model_selection import train_test_split
-from scipy.fftpack import fft, ifft
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
 
