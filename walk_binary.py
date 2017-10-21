@@ -15,7 +15,7 @@ lag window varying from 1 to 201 in 10 unit increments. Accuracy seems to peak b
 size of 11 and 41.
 """
 
-# window_scores = test_window(40, 1)
+ window_scores = test_window(40, 1)
 """
 Accuracy seems to peak at window = 16
 """
@@ -36,7 +36,7 @@ walk_bin = DataFrame(lagged_complete)
 
 
 
-X = walk_bin[to_lag]
+X = walk_bin.drop(walk_bin.columns[[0,1]], axis=1)
 Y = walk_bin['y']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.33, random_state=7)
 model = LogisticRegression()
