@@ -1,24 +1,14 @@
-
-import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
-from pandas import concat
-from sklearn.model_selection import train_test_split
-from scipy.fftpack import fft, ifft
-from sklearn import metrics
-from sklearn.cluster import DBSCAN
 from numpy.fft import fftn
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-import pickle
 execfile('start.py')
 execfile('stand_sit.py')
 execfile('walk_binary.py')
 
 ran = DataFrame(np.genfromtxt('random_seq.csv', delimiter=",")).dropna()
 rand = ran.drop([ran.columns[0]], axis=1)
-random = fftn(rand)
+random = DataFrame(fftn(rand))
 
 """
 stand_sit is used to train stand_sit_model
@@ -40,8 +30,8 @@ for i in walk_predict:
 
 for i in range(len(random_predict)):
     if random_predict[i] == 3:
-        random_predict[i] = walk_predict[i]
+        random_predict[i] = stand_sit_predict[i]
     else:
         continue
 
-# print(random_predict)
+print(random_predict)
