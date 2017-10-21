@@ -17,5 +17,6 @@ Very quickly, the lag window provided an accuracy score approaching 1. I mention
 I found an error later that showed convergence much sooner. Nevertheless, I left that bit in their and I'm not sure how relevant
 it was because in the random_sequence, I didn't use a lag window at all, so as to keep the dimensionality of the same across groups.
 
-I expect there is much room for improvement; this has been my first experience with signal data, as well as unsupervised learning,
+There is much room for improvement; this has been my first experience with signal data, as well as unsupervised learning,
 so I look forward to learning more. 
+The predicted output from `random_sequence.py` notably does not cantain anything other than walking and noise. 
