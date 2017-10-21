@@ -4,7 +4,6 @@ The trained model is saved as 'walk_LR_bin.sav'
 """
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-import pickle
 
 execfile('start.py')
 execfile('window.py')
@@ -42,12 +41,3 @@ walk_model.score(X_train, Y_train)
 
 # print('walk_model coeffictient and intercept: %d, %d' % (walk_model.coef_, walk_model.intercept_))
 predicted = walk_model.predict(X_test)
-filename = 'walk_LR_bin.sav'
-pickle.dump(walk_model, open(filename, 'wb'))
-
-""" To load model from saved
-`loaded_model = pickle.load(open(filename, 'rb'))
-result = loaded_model.score(X_test, Y_test)
-print result`
-"""
-
