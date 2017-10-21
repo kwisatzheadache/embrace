@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from scipy.fftpack import fft, ifft
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
+from numpy.fft import fftn
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -16,7 +17,8 @@ execfile('stand_sit.py')
 execfile('walk_binary.py')
 
 ran = DataFrame(np.genfromtxt('random_seq.csv', delimiter=",")).dropna()
-random = ran.drop([ran.columns[0]], axis=1)
+rand = ran.drop([ran.columns[0]], axis=1)
+random = fftn(rand)
 
 """
 stand_sit is used to train stand_sit_model

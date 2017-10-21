@@ -87,6 +87,7 @@ def test_window(top, increment):
     for i in range(top/increment):
         window = i * increment + 1
         to_lag = cols[1:-1]
+from np_fftpack import fft
         lagged_walk = lag_set(df_walk, to_lag, window)
         lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
         lagged_complete = concat([lagged_walk, lagged_stand_sit])

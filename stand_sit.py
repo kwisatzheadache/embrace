@@ -26,3 +26,6 @@ In this clustering method, sit=0, standing=1
 stand_sit_model = DBSCAN(eps=0.5, min_samples=10).fit(no_id)
 labels = stand_sit_model.labels_
 
+"""
+I have tried transforming the data via fttn, but it breaks the classification model.
+"""
