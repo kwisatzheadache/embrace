@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
 from pandas import concat
-from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
 from scipy.fftpack import fft, ifft
-
+from sklearn import metrics
+from sklearn.cluster import DBSCAN
 
 stand_sit = DataFrame(np.genfromtxt('stand_sit.csv', delimiter=",")).dropna()
 
@@ -37,6 +37,7 @@ def lag(variable, window):
 cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z']
 stand_sit.columns = cols
 to_lag = cols[1:]
+no_id = stand_sit.drop(['id'], axis=1)
 
 # Use window of 16, as per window testing
 window = 16
@@ -54,23 +55,31 @@ def lag_set(df, lag_variables, window_x):
         df1[cols] = lagged
     return df1[:][window_x:]
 
-lagged_stand_sit = lag_set(stand_sit, to_lag, window)
+lagged_stand_sit = lag_set(stand_sit, to_lag, window).drop(['id'], axis=1)
 
 """
 I think the best method for this is DBScan because it is designed for data with n groups, where most data is within the groups with small amounts between representing transition from one to the other.
 """
-X = DataFrame(lagged_stand_sit.drop(lagged_stand_sit.columns[[0]], axis=1))
-X_train, X_test = train_test_split(X, test_size=.33, random_state=7)
+# X_train, X_test = train_test_split(lagged_stand_sit.drop('id', axis=1), test_size=0.33, random_state=7)
+# db = DBSCAN(eps=0.3, min_samples=5).fit(X_train)
+# core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+# core_samples+mask[db.core_sample_indices_] = True
+# labels = db.labels
 
-model=KMeans()
-k_means = KMeans(n_clusters=3, random_state=0)
-model.fit(X_train)
-predicted=model.predict(X_test)
 
-f_transform = fft(X)
-f_train, f_test = train_test_split(f_transform, test_size=.33, random_state=7)
+dbscan = DBSCAN(eps=0.5, min_samples=10).fit(no_id)
+labels = dbscan.labels_
 
-f_model=KMeans()
-k_means = KMeans(n_clusters=3, random_state=0)
-f_model.fit(f_train)
-f_predicted=f_model.predict(f_test)
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2).fit(no_id)
+pca_2d = pca.transform(no_id)
+for i in range(0, pca_2d.shape[0]):
+    if dbscan.labels_[i] == 0:
+        c1 = plt.scatter(pca_2d[i,0], pca_2d[i,1], c='r', marker='+')
+    elif dbscan.labels_[i] == 1:
+        c2 = plt.scatter(pca_2d[i,0], pca_2d[i,1], c='g', marker='o')
+    elif dbscan.labels_[i] == 2:
+        c3 = plt.scatter(pca_2d[i,0], pca_2d[i,1], c='b', marker='*')
+plt.legend([c1, c2, c3], ['cluster1,' 'cluster2', 'noise'])
+plt.title('bdscan finds 2 clusters')
+plt.show()
