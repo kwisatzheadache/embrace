@@ -19,4 +19,4 @@ it was because in the random_sequence, I didn't use a lag window at all, so as t
 
 There is much room for improvement; this has been my first experience with signal data, as well as unsupervised learning,
 so I look forward to learning more. 
-The predicted output from `random_sequence.py` notably does not cantain anything other than walking and noise. 
+The predicted output from `random_sequence.py` notably does not cantain anything other than walking and noise.
