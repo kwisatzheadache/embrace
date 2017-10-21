@@ -18,8 +18,6 @@ execfile('walk_binary.py')
 ran = DataFrame(np.genfromtxt('random_seq.csv', delimiter=",")).dropna()
 random = ran.drop([ran.columns[0]], axis=1)
 
-X = lag_set_without_y(random, random.columns, 16)
-walk_predict1 = stand_sit_model.predict(X)
 """
 stand_sit is used to train stand_sit_model
 stand_sit_model.predict(random)
@@ -34,8 +32,6 @@ walk_predict=walk_model.predict(random)
 stand_sit_predict = stand_sit_model.fit_predict(random)
 
 random_predict = []
-
-steps = ['sit', 'stand', 'walk']
 
 for i in walk_predict:
     random_predict.append(i)
