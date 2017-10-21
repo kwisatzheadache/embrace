@@ -15,7 +15,7 @@ lag window varying from 1 to 201 in 10 unit increments. Accuracy seems to peak b
 size of 11 and 41.
 """
 
- window_scores = test_window(40, 1)
+# window_scores = test_window(40, 1)
 """
 Accuracy seems to peak at window = 16
 """
@@ -25,28 +25,25 @@ Accuracy seems to peak at window = 16
 """
 Since window = 16 yields the best results, that's what we'll use.
 """
-window = 16
-
 # Create lagged dataframes for walk and stand_sit
+window = 0
 lagged_walk = lag_set(df_walk, to_lag, window)
 lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
 lagged_complete = concat([lagged_walk, lagged_stand_sit])
-
 walk_bin = DataFrame(lagged_complete)
 
-
-
+# Create test and train sets, removing 'id'
 X = walk_bin.drop(walk_bin.columns[[0,1]], axis=1)
 Y = walk_bin['y']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.33, random_state=7)
-model = LogisticRegression()
-model.fit(X_train, Y_train)
-model.score(X_train, Y_train)
+walk_model = LogisticRegression()
+walk_model.fit(X_train, Y_train)
+walk_model.score(X_train, Y_train)
 
-# print('Model coeffictient and intercept: %d, %d' % (model.coef_, model.intercept_))
-predicted = model.predict(X_test)
+# print('walk_model coeffictient and intercept: %d, %d' % (walk_model.coef_, walk_model.intercept_))
+predicted = walk_model.predict(X_test)
 filename = 'walk_LR_bin.sav'
-pickle.dump(model, open(filename, 'wb'))
+pickle.dump(walk_model, open(filename, 'wb'))
 
 """ To load model from saved
 `loaded_model = pickle.load(open(filename, 'rb'))

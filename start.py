@@ -6,7 +6,6 @@ from pandas import concat
 stand_sit = np.genfromtxt('stand_sit.csv', delimiter=",")
 walk1 = np.genfromtxt('walking.csv', delimiter=",")
 walk2 = np.genfromtxt('walking_2.csv', delimiter=",")
-random = np.genfromtxt('random_seq.csv', delimiter=",")
 
 """
 First step is to label the stand_sit, so that they can be classified... Clustering ought to
@@ -24,14 +23,14 @@ train a binary classifier to recognize walking. I think I'll do that.
 walk_both = np.vstack([walk1, walk2])
 walk_y = []
 for i in walk_both:
-    walk_y.append([1])
+    walk_y.append([2])
 walk_y = np.array(walk_y)
 walk_combined = np.hstack((walk_both, walk_y))
 
 # Again for the stand_sit data
 stand_sit_y = []
 for i in stand_sit:
-    stand_sit_y.append([0])
+    stand_sit_y.append([3])
 stand_sit_y = np.array(stand_sit_y)
 stand_sit_combined = np.hstack((stand_sit, stand_sit_y))
 
