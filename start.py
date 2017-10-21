@@ -1,8 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from statsmodels.tsa.ar_model import AR
-from sklearn.metrics import mean_squared_error
-from math import sqrt
 from pandas import DataFrame
 from pandas import concat
 
