@@ -2,7 +2,7 @@
 
 Initial analyses of sit, stand, walk data. 
 
-`random_sequence.py' outputs predictions based on the random_seq.csv data. 0=sit, 1=stand, 2=walk, -1=noise.
+`random_sequence.py` outputs predictions based on the random_seq.csv data. 0=sit, 1=stand, 2=walk, -1=noise.
 
 I encountered some difficulty with transforming the data, as most transformations broke my DBScan model for the stand_sit data. I'm 
 wondering how the data were transformed before this point because while it broke the stand_sit model, it worked to make the random
