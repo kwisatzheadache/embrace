@@ -4,6 +4,8 @@ from pandas import DataFrame
 from pandas import concat
 from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
+from scipy.fftpack import fft, ifft
+
 
 stand_sit = DataFrame(np.genfromtxt('stand_sit.csv', delimiter=",")).dropna()
 
@@ -54,11 +56,21 @@ def lag_set(df, lag_variables, window_x):
 
 lagged_stand_sit = lag_set(stand_sit, to_lag, window)
 
-
-X = DataFrame(lagged_stand_sit[1:])
+"""
+I think the best method for this is DBScan because it is designed for data with n groups, where most data is within the groups with small amounts between representing transition from one to the other.
+"""
+X = DataFrame(lagged_stand_sit.drop(lagged_stand_sit.columns[[0]], axis=1))
 X_train, X_test = train_test_split(X, test_size=.33, random_state=7)
 
 model=KMeans()
 k_means = KMeans(n_clusters=3, random_state=0)
 model.fit(X_train)
 predicted=model.predict(X_test)
+
+f_transform = fft(X)
+f_train, f_test = train_test_split(f_transform, test_size=.33, random_state=7)
+
+f_model=KMeans()
+k_means = KMeans(n_clusters=3, random_state=0)
+f_model.fit(f_train)
+f_predicted=f_model.predict(f_test)
