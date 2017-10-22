@@ -3,6 +3,46 @@ import numpy as np
 from pandas import DataFrame
 from pandas import concat
 
+def lag(variable, window):
+# Creates a df with columns [T, t-1, t-2, ... t-window]
+    df1 = DataFrame(variable)
+    for i in range(window):
+        j = window - i
+        df1 = concat([df1, variable.shift(j)], axis=1)
+    columns = [variable.name]
+    for i in range(window):
+        j = window - i
+        columns.append(variable.name + ' t - %d' % j)
+    df1.columns = columns
+    return df1.iloc[window:]
+
+# Function receives the df, xyz columns, and a window size; returns a new df with xyz lagged
+# according to window size, with id and y untouched.
+def lag_set(df, lag_variables, window):
+    df1 = DataFrame(df[['id', 'y']])
+    for column in lag_variables:
+        lagged = lag(df[column], window)
+        cols = lagged.columns
+        df1[cols] = lagged
+    return df1[:][window:]
+
+
+
+def test_window(top, increment):
+    acc_score = []
+    for i in range(top/increment):
+        window = i * increment + 1
+        to_lag = cols[1:-1]
+        lagged_walk = lag_set(df_walk, to_lag, window)
+        lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
+        lagged_complete = concat([lagged_walk, lagged_stand_sit])
+        walk_bin = DataFrame(lagged_complete)
+        execfile('binary.py')
+        print("Window: %f" % window)
+        acc_score.append({'window': window, 'accuracy': [results.mean(), results.std()]})
+    return np.array(acc_score)
+
+to_lag = cols[1:-1]
 stand_sit = np.genfromtxt('stand_sit.csv', delimiter=",")
 walk1 = np.genfromtxt('walking.csv', delimiter=",")
 walk2 = np.genfromtxt('walking_2.csv', delimiter=",")
@@ -43,19 +83,6 @@ combined = np.vstack((walk_combined, stand_sit_combined))
 # iteratively run through different window sizes, testing the model fit.
 
 
-# Creates a df with columns [T, t-1, t-2, ... t-window]
-def lag(variable, window):
-    df1 = DataFrame(variable)
-    for i in range(window):
-        j = window - i
-        df1 = concat([df1, variable.shift(j)], axis=1)
-    columns = [variable.name]
-    for i in range(window):
-        j = window - i
-        columns.append(variable.name + ' t - %d' % j)
-    df1.columns = columns
-    return df1.iloc[window:]
-
 
 # Convert arrays to df's and remove nan's in preparation for lagging
 df_walk = DataFrame(walk_combined).dropna()
@@ -70,28 +97,3 @@ df_stand_sit.columns = cols
 """
 Separate this into a different file? So it can be called in the window loop
 """
-# Function receives the df, xyz columns, and a window size; returns a new df with xyz lagged
-# according to window size, with id and y untouched.
-def lag_set(df, lag_variables, window):
-    df1 = DataFrame(df[['id', 'y']])
-    for column in lag_variables:
-        lagged = lag(df[column], window)
-        cols = lagged.columns
-        df1[cols] = lagged
-    return df1[:][window:]
-
-to_lag = cols[1:-1]
-
-def test_window(top, increment):
-    acc_score = []
-    for i in range(top/increment):
-        window = i * increment + 1
-        to_lag = cols[1:-1]
-        lagged_walk = lag_set(df_walk, to_lag, window)
-        lagged_stand_sit = lag_set(df_stand_sit, to_lag, window)
-        lagged_complete = concat([lagged_walk, lagged_stand_sit])
-        walk_bin = DataFrame(lagged_complete)
-        execfile('binary.py')
-        print("Window: %f" % window)
-        acc_score.append({'window': window, 'accuracy': [results.mean(), results.std()]})
-    return np.array(acc_score)
