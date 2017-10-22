@@ -18,3 +18,6 @@ Question: whether to have windows as dataframes or np.arrays?
 
 
 when lagging set and creating windows, make sure that after all windows are created, they are the same size after NAN's are trimmed. Or make sure that varying size is not a problem.
+
+
+look into partial amplitudes in fft

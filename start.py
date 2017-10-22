@@ -35,4 +35,24 @@ def lag(variable, window):
     return np.array(df.dropna())
 
 def dataset_to_windows(dataset, windowsize):
-    for i in dataset:
+    windows = list()
+    row, col = dataset.shape
+    for i in range(col):
+        if i > 0:
+           windows.append(lag(dataset[:,i], windowsize))
+    return np.array(windows)
+
+# INPUT dataset_to_windows output
+# OUTPUT 3 dimensional array
+def fft_transform(windows):
+    arr_windows = list()
+    for i in range(len(windows)):
+        arr_transforms = list()
+        for j in range(len(windows[i])):
+            arr_transforms.append(get_fft(windows[i,j,:]))
+        arr_windows.append(arr_transforms)
+    return np.array(arr_windows)
+
+windows = dataset_to_windows(walk1, 15)
+
+fft_transformed = fft_transform(windows)
