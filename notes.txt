@@ -11,3 +11,10 @@ Calculate magnitude of signal, then subtract 9.8
 
 Keep only the top 20% of frequencies for example. Otpimize for best fit.
 
+server: 70.95.198.60
+
+
+Question: whether to have windows as dataframes or np.arrays?
+
+
+when lagging set and creating windows, make sure that after all windows are created, they are the same size after NAN's are trimmed. Or make sure that varying size is not a problem.
