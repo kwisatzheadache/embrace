@@ -5,8 +5,8 @@ import sys
 # OUTPUT: [Fk, frequ], list of coeff, list of freq values
 def get_fft(signal):
     fs = 100
-    Fk = np.fft.rfft(signal)/len(signal)
-    f = np.fft.rfftfreq(len(signal), 1/fs)
+    Fk = np.fft.rfft(signal)/float(len(signal))
+    f = np.fft.rfftfreq(len(signal), 1./fs)
     return Fk, f
 
 # INPUT: [Fk] (list of coeff)
