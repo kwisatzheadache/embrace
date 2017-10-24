@@ -30,18 +30,8 @@ def fft_transform(windows):
     for i in range(len(windows)):
         arr_transforms = list()
         for j in range(len(windows[i])):
-            # try:
                 arr_transforms.append(get_fft(windows[i][j]))
-            # except IndexError:
-            #     print(windows[i][j].shape)
-            #     print j
-            #     print(windows[i][j])
-            #     print(get_fft(windows[i,j]))
-
         arr_windows.append(arr_transforms)
-        # try:
-        # except IndexError:
-        #     print(arr_windows.shape())
     return np.array(arr_windows)
 
 def data_transform(dataset, windowsize):
