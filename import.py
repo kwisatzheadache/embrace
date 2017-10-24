@@ -13,3 +13,7 @@ random = np.genfromtxt('data/random_seq.csv', delimiter=",")
 
 random_transformed = data_transform(random, 15)
 
+"""
+data_transform/2 creates windows of size $2. The resultant dataset is 4d. transformed.shape = (a,b,c,d)
+Consequently, dimensionality must be reduced to perform classification.
+"""
