@@ -53,7 +53,8 @@ def get_dom_freq(Fk, n_freq):
     Fk_mag = np.abs(Fk)**2
     Fk_mag_sort = np.abs(Fk)**2
     Fk_mag_sort.sort()
-    idx = np.zeros(n_freq)
-    for i in range(n_freq):
+    n_freq_shape = n_freq.shape
+    idx = np.zeros((n_freq_shape))
+    for i in range(len(n_freq)):
         idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
     return idx.astype(int)

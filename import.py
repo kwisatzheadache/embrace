@@ -1,5 +1,7 @@
 from sklearn.cluster import DBSCAN
 
+execfile('functions.py')
+
 stand_sit_with = np.genfromtxt('data/stand_sit.csv', delimiter=",")
 walk1 = np.genfromtxt('data/walking.csv', delimiter=",")
 walk2 = np.genfromtxt('data/walking_2.csv', delimiter=",")
@@ -13,7 +15,10 @@ random = np.genfromtxt('data/random_seq.csv', delimiter=",")
 
 random_transformed = data_transform(random, 15)
 
+Fk, n_freq = random_transformed[1,1]
+
 """
 data_transform/2 creates windows of size $2. The resultant dataset is 4d. transformed.shape = (a,b,c,d)
 Consequently, dimensionality must be reduced to perform classification.
 """
+
