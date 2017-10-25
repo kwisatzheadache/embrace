@@ -12,6 +12,8 @@ sit = np.genfromtxt('data/sits.csv', delimiter=",")
 remove_nan = DataFrame(sit).dropna()
 sits = np.array(remove_nan)
 random = np.genfromtxt('data/random_seq.csv', delimiter=",")
+remove_nan = DataFrame(random).dropna()
+random = np.array(remove_nan)
 
 random_transformed = data_transform(random, 15)
 
