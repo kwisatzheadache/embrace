@@ -2,7 +2,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
 from pandas import concat
-import sys 
+import sys
+
+def get_nx10(location):
+    cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
+    array = np.genfromtxt(location, delimiter=",")
+    df = DataFrame(array).dropna()
+    df.columns = cols
+    return(df)
+
+def label_y(df, y_value):
+    y = []
+    for i in len(df['acc_x']):
+        y.append(value)
+    df['y'] = y
 
 def lag(variable, window):
     """
@@ -20,7 +33,7 @@ def dataset_to_windows(dataset, windowsize):
     row, col = dataset.shape
     for i in range(col):
         if i > 0:
-           windows.append(lag(dataset[:,i], windowsize))
+           windows.append(lag(np.array(dataset)[:,i], windowsize))
     return np.array(windows)
 
 def fft_transform(windows):
@@ -34,9 +47,22 @@ def fft_transform(windows):
         arr_windows.append(arr_transforms)
     return np.array(arr_windows)
 
-def data_transform(dataset, windowsize):
+def data_transform(dataset, windowsize, dom_freq_size):
+    cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
     windows = dataset_to_windows(dataset, windowsize)
-    return fft_transform(windows)
+    fft = fft_transform(windows)
+    df = DataFrame()
+    for i in range(len(fft)):
+        col = []
+        for j in range(len(fft[1,:])):
+            if type(i) != int:
+                print(i)
+            Fk, n_freq = fft[i,j]
+            dom = get_dom_freq(Fk, dom_freq_size)
+            freqs = Fk[[dom]]
+            col.append(freqs)
+        df[cols[i]] = col
+    return(df)
 
 def get_fft(signal):
     # INPUT: [N] array of values

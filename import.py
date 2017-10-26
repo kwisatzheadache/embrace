@@ -1,26 +1,30 @@
-from sklearn.cluster import DBSCAN
-
 execfile('functions.py')
 
-stand_sit_with = np.genfromtxt('data/stand_sit.csv', delimiter=",")
-walk1 = np.genfromtxt('data/walking.csv', delimiter=",")
-walk2 = np.genfromtxt('data/walking_2.csv', delimiter=",")
-stand = np.genfromtxt('data/stands.csv', delimiter=",")
-remove_nan = DataFrame(stand).dropna()
-stands= np.array(remove_nan)
-sit = np.genfromtxt('data/sits.csv', delimiter=",")
-remove_nan = DataFrame(sit).dropna()
-sits = np.array(remove_nan)
-random = np.genfromtxt('data/random_seq.csv', delimiter=",")
-remove_nan = DataFrame(random).dropna()
-random = np.array(remove_nan)
+stand_sit = get_nx10('data/stand_sit.csv')
+walk = get_nx10('data/walk.csv')
+sit = get_nx10('data/sits.csv')
+stand = get_nx10('data/stands.csv')
+random = get_nx10('data/random_seq.csv')
 
-random_transformed = data_transform(random, 100)
+# Set window and freqency values and labels
+window = 100
+freq = 10
+walk_label = 1
+sit_label = 2
+stand_label = 3
 
-Fk, n_freq = random_transformed[1,1]
 
-"""
-data_transform/2 creates windows of size $2. The resultant dataset is 4d. transformed.shape = (a,b,c,d)
-Consequently, dimensionality must be reduced to perform classification.
-"""
+"""----------------- TRANSFORM DATA ------------------"""
+walk = data_transform(walk, window, freq)
+# sit = data_transform(sit, window, freq)
+# stand = data_transform(stand, window, freq)
+
+# stand_sit = data_transform(stand_sit, window, freq)
+# random = data_transform(random, window, freq)
+
+"""----------------- LABEL Y-VALUES --------------------""" 
+# Has y-values
+walk = label_y(walk, walk_label)
+# sit = label_y(sit, sit_label)
+# stand = label_y(stand, stand_label)
 
