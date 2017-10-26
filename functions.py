@@ -16,7 +16,7 @@ def lag(variable, window):
     return np.array(df.dropna())
 
 def dataset_to_windows(dataset, windowsize):
-    windows = list()
+    windows = []
     row, col = dataset.shape
     for i in range(col):
         if i > 0:
@@ -26,9 +26,9 @@ def dataset_to_windows(dataset, windowsize):
 def fft_transform(windows):
     # INPUT dataset_to_windows output
     # OUTPUT 3 dimensional array
-    arr_windows = list()
+    arr_windows = []
     for i in range(len(windows)):
-        arr_transforms = list()
+        arr_transforms = []
         for j in range(len(windows[i])):
                 arr_transforms.append(get_fft(windows[i][j]))
         arr_windows.append(arr_transforms)
@@ -53,12 +53,8 @@ def get_dom_freq(Fk, n_freq):
     Fk_mag = np.abs(Fk)**2
     Fk_mag_sort = np.abs(Fk)**2
     Fk_mag_sort.sort()
-    n_freq_shape = n_freq.shape
-    idx = np.zeros((n_freq_shape))
-    for i in range(len(n_freq)):
-        try:
-            idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
-        except:
-            print(i)
-            break
+    # n_freq_shape = n_freq.shape
+    idx = np.zeros((n_freq))
+    for i in range(n_freq):
+        idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
     return idx.astype(int)
