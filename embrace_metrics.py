@@ -15,7 +15,6 @@ STEP_SIZE = 13 #step size for step (walking) detection
 #STEP_SIZE = 50
 
 def merge_ics(ics):
-    """Merge hic or lics. Just call me if you want to talk about this algorithm + get_lics"""
     i = 0
     while i < len(ics)-1:
         if ics[i][1] == ics[i+1][0]:
@@ -52,23 +51,16 @@ def get_lics(signal, step_size=STEP_SIZE, thresh=THRESH_LOW):
 
     return [lics,hics]
 
-def plot_var(signal,win_len=WIN_LEN):
-    """Plot the variance of a sliding window of size WIN_LEN
-        Input:
-            signal - the signal to plot
-            win_len - the size of the sliding window"""
+def plot_var(signal):
     variances = []
-    for i in range(len(signal)-win_len):
-        variances.append(np.var(signal[i:i+ein_len]))
-    plt.title("Variance of Window - Size " + str(win_len))
+    for i in range(len(signal)-WIN_LEN):
+        variances.append(np.var(signal[i:i+WIN_LEN]))
+    plt.title("Variance of Window - Size " + str(WIN_LEN))
     plt.plot(range(len(variances)), variances)
     plt.show()
 
 def calc_step_var(vals):
-    """caculate the percentage of step time spent on each foot. Also
-    displays the variance between step locations for each foot.
-        Input:
-            vals - the ouput of embrace_setup.get_lists(file)"""
+
     t,ac,gy,mag,ac_mag,gy_mag,mag_mag = vals
 
     max_ac_amp = max(ac_mag)
@@ -96,30 +88,29 @@ def calc_step_var(vals):
     f2_av = np.average(f2)
     f1_sd = np.var(f1)**.5
     f2_sd = np.var(f2)**.5
-    
-    #discard outlier, where an outlier falls outside the window
-    # average +- sig_mult*sigma
-    sig_mult = 1.5
-    f1_l = f1_av-(sig_mult*f1_sd)
-    f1_h = f1_av+(sig_mult*f1_sd)
-    f2_l = f2_av-(sig_mult*f2_sd)
-    f2_h = f2_av+(sig_mult*f2_sd)
 
-    #filter the data
+    f1_l = f1_av-(1.5*f1_sd)
+    f1_h = f1_av+(1.5*f1_sd)
+    f2_l = f2_av-(1.5*f2_sd)
+    f2_h = f2_av+(1.5*f2_sd)
+
     f1 = [ v for v in f1 if f1_l <= v and f1_h >= v]
     f2 = [ v for v in f2 if f2_l <= v and f2_h >= v]
 
+    print(f1)
+    print(f2)
     f_1 = sum(f1)/len(f1)
     f_2 = sum(f2)/len(f2)
     f3 = f_1 + f_2
     f_1 /= f3 * .01
     f_2 /= f3 * .01
-    #print out some metrics
     print("Number of steps counted: " + str(len(hics)))
     print("f1: " + str(f_1))
     print("f1 sd: " + str(np.var(f1)**.5))
     print("f2: " + str(f_2))
     print("f2 sd: " + str(np.var(f2)**.5))
+    print("spread stance distribution: " + str(np.abs(f_1-f_2)))
+    print("spread of std devs: " + str(np.abs(np.var(f1)**.5 - np.var(f2)**.5)))
 
 
 

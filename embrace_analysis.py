@@ -5,7 +5,7 @@ import embrace_fft as ef
 import embrace_metrics as em
 
 #default window size for kmeans clustering
-WIN_SIZE = 50
+WIN_SIZE = 10
 #default number of clusters for walk cycles
 NUM_CLUSTERS = 8
 
@@ -39,12 +39,11 @@ def kmeans_walk(vals, num_clusters=NUM_CLUSTERS):
     #iterate through the 3 subdimensions for ac,gy,mag
     for v in vals[1:4]:
         for r in v:
-            tmp = get_windows(r)
-            wins.append(get_windows(r))
+            wins.append(kmeans_windows(r))
 
     #the magnitude vectors are 1 dimensional
     for i,v in enumerate(vals[4:7]):
-        wins.append(get_windows(v))
+        wins.append(kmeans_windows(v))
 
     #convert to a numpy array and reshape as (num_wins,num_signals,win_size)
     wins = np.array(wins)
