@@ -1,14 +1,11 @@
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+joined = pd.concat([walk, sit, stand])
+X = joined.drop(walk.columns[[0,10]], axis=1)
+Y = joined['y']
 
-X = walk_bin.drop(walk_bin.columns[[0,1]], axis=1)
-Y = walk_bin['y']
+neigh = KNeighborsClassifier()
+neigh.fit(X,Y)
 
-kfold = KFold(n_splits=10, random_state=7)
-model = LogisticRegression()
-scoring = 'accuracy'
-global results
-results = cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
-print("Accuracy: %.6f (%.6f)") % (results.mean(), results.std())
+unlabeled = random.drop(['id'], axis=1)
+predicted = neigh.predict(unlabeled)
 

@@ -16,15 +16,15 @@ stand_label = 3
 
 """----------------- TRANSFORM DATA ------------------"""
 walk = data_transform(walk, window, freq)
-# sit = data_transform(sit, window, freq)
-# stand = data_transform(stand, window, freq)
+sit = data_transform(sit, window, freq)
+stand = data_transform(stand, window, freq)
 
-# stand_sit = data_transform(stand_sit, window, freq)
-# random = data_transform(random, window, freq)
+stand_sit = data_transform(stand_sit, window, freq)
+random = data_transform(random, window, freq)
 
 """----------------- LABEL Y-VALUES --------------------""" 
 # Has y-values
 walk = label_y(walk, walk_label)
-# sit = label_y(sit, sit_label)
-# stand = label_y(stand, stand_label)
+sit = label_y(sit, sit_label)
+stand = label_y(stand, stand_label)
 

@@ -13,9 +13,10 @@ def get_nx10(location):
 
 def label_y(df, y_value):
     y = []
-    for i in len(df['acc_x']):
-        y.append(value)
+    for i in range(len(df['acc_x'])):
+        y.append(y_value)
     df['y'] = y
+    return(df)
 
 def lag(variable, window):
     """
@@ -48,20 +49,21 @@ def fft_transform(windows):
     return np.array(arr_windows)
 
 def data_transform(dataset, windowsize, dom_freq_size):
-    cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
+    cols = dataset.columns
     windows = dataset_to_windows(dataset, windowsize)
     fft = fft_transform(windows)
     df = DataFrame()
     for i in range(len(fft)):
         col = []
         for j in range(len(fft[1,:])):
-            if type(i) != int:
-                print(i)
             Fk, n_freq = fft[i,j]
             dom = get_dom_freq(Fk, dom_freq_size)
             freqs = Fk[[dom]]
-            col.append(freqs)
-        df[cols[i]] = col
+            ab_freq = [abs(f) for f in freqs]
+            col.append(ab_freq)
+        vectorize = np.array([np.array(x) for x in col])
+        df[cols[i+1]] = col
+    df['id'] = dataset['id']
     return(df)
 
 def get_fft(signal):
