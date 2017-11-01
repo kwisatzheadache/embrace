@@ -46,9 +46,12 @@ def get_dom_freq(Fk, freq, n_freq):
     
     #sort based on frequency from lo to hi
     #convert from numpy float to python float for mapping
-    dom_f = [float(f) for f in dom_f]
+    dom_f = [float(abs(f)) for f in dom_f]
     f_Fk = dict(zip(dom_f,dom_Fk))
     f_sorted = sorted(dom_f)
+    # return(dom_f, f_Fk, f_sorted, dom_Fk)
+
+
     dom_Fk = []
     for f in f_sorted:
         dom_Fk.append(f_Fk[f][0])

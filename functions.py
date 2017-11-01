@@ -57,7 +57,7 @@ def data_transform(dataset, windowsize, dom_freq_size):
         col = []
         for j in range(len(fft[1,:])):
             Fk, n_freq = fft[i,j]
-            dom = get_dom_freq(Fk, dom_freq_size)
+            dom = get_dom_freq(Fk, n_freq, dom_freq_size)
             freqs = Fk[[dom]]
             ab_freq = [abs(f) for f in freqs]
             col.append(ab_freq)
@@ -66,23 +66,23 @@ def data_transform(dataset, windowsize, dom_freq_size):
     df['id'] = dataset['id']
     return(df)
 
-def get_fft(signal):
-    # INPUT: [N] array of values
-    # OUTPUT: [Fk, frequ], list of coeff, list of freq values
-    fs = 100
-    Fk = np.fft.rfft(signal)/float(len(signal))
-    f = np.fft.rfftfreq(len(signal), 1./fs)
-    return Fk, f
+# def get_fft(signal):
+#     # INPUT: [N] array of values
+#     # OUTPUT: [Fk, frequ], list of coeff, list of freq values
+#     fs = 100
+#     Fk = np.fft.rfft(signal)/float(len(signal))
+#     f = np.fft.rfftfreq(len(signal), 1./fs)
+#     return Fk, f
 
-def get_dom_freq(Fk, n_freq):
-    # INPUT: [Fk] (list of coeff)
-    #        n_freq (number of freq)
-    # OUTPUT: [Ind] (list of indices of dominant frequencies)
-    Fk_mag = np.abs(Fk)**2
-    Fk_mag_sort = np.abs(Fk)**2
-    Fk_mag_sort.sort()
-    # n_freq_shape = n_freq.shape
-    idx = np.zeros((n_freq))
-    for i in range(n_freq):
-        idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
-    return idx.astype(int)
+# def get_dom_freq(Fk, n_freq):
+#     # INPUT: [Fk] (list of coeff)
+#     #        n_freq (number of freq)
+#     # OUTPUT: [Ind] (list of indices of dominant frequencies)
+#     Fk_mag = np.abs(Fk)**2
+#     Fk_mag_sort = np.abs(Fk)**2
+#     Fk_mag_sort.sort()
+#     # n_freq_shape = n_freq.shape
+#     idx = np.zeros((n_freq))
+#     for i in range(n_freq):
+#         idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
+#     return idx.astype(int)
