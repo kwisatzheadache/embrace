@@ -57,10 +57,8 @@ def data_transform(dataset, windowsize, dom_freq_size):
         col = []
         for j in range(len(fft[1,:])):
             Fk, n_freq = fft[i,j]
-            dom = get_dom_freq(Fk, n_freq, dom_freq_size)
-            freqs = Fk[[dom]]
-            ab_freq = [abs(f) for f in freqs]
-            col.append(ab_freq)
+            dom_Fk, f_sorted = get_dom_freq(Fk, n_freq, dom_freq_size)
+            col.append(np.array([dom_Fk, f_sorted]))
         vectorize = np.array([np.array(x) for x in col])
         df[cols[i+1]] = col
     df['id'] = dataset['id']
