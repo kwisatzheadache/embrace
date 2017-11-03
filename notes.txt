@@ -1,38 +1,23 @@
-Features of window: max amplitude, avg, min
-frequency domain - (freq coeff) max frequ coeff
+Current goal: feature engineering. Simple classification between walk/not walk to determine which features are most valid.
+To that end, anticipated work flow is as follows:
+   import raw
+   Binning
+      fft transform 
+      dominant freqs and coeffs
+      weighted average of bin
+      average magnitudes of 3 inputs
+      max amplitude (calculated from raw)
+   ...
+   Shape of input is 2D, so (45, 3000) is acceptable
 
-modularize functions
-define functions first
+Benefits/drawbacks to binning vs windows
 
 
-Accelerometer Magnitude of signal... subtract 9.8 for gravity
-
-Calculate magnitude of signal, then subtract 9.8
-
-Keep only the top 20% of frequencies for example. Otpimize for best fit.
 
 server: 70.95.198.60
 
-
-Question: whether to have windows as dataframes or np.arrays?
-
-
-when lagging set and creating windows, make sure that after all windows are created, they are the same size after NAN's are trimmed. Or make sure that varying size is not a problem.
-
-
 look into partial amplitudes in fft
 
-
-
-***********************
-Questions for 11/03
-
-What is bin sizing, how does it work? Different from top freq?
-error in embrace_fft.py line 100 division by 0
-
-Is it better to have 4d input (9,31000, 2,10) or something more like (30, 30000)?
-
-Magnitude of raw data?
 
 
 Draw out basic data flow and structure. Sit down and map out transforms, etc.
