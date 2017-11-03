@@ -21,3 +21,18 @@ when lagging set and creating windows, make sure that after all windows are crea
 
 
 look into partial amplitudes in fft
+
+
+
+***********************
+Questions for 11/03
+
+What is bin sizing, how does it work? Different from top freq?
+error in embrace_fft.py line 100 division by 0
+
+Is it better to have 4d input (9,31000, 2,10) or something more like (30, 30000)?
+
+Magnitude of raw data?
+
+
+Draw out basic data flow and structure. Sit down and map out transforms, etc.
