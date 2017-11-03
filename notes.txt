@@ -7,10 +7,21 @@ To that end, anticipated work flow is as follows:
       weighted average of bin
       average magnitudes of 3 inputs
       max amplitude (calculated from raw)
+
    ...
    Shape of input is 2D, so (45, 3000) is acceptable
 
 Benefits/drawbacks to binning vs windows
+
+What is kullback-leibler divergence?
+     Kullback-Leibler divergence computes the loss of information between the full frequency signal and the reduced frequency signal.
+
+kld(Fk, freq, Fk_red, f_red) returns entropy between the sets. Closer to 0 = better.
+
+
+Complex numbers in frequencies - can always be reduced to abs(freq), with no regard to lost information.
+
+
 
 
 

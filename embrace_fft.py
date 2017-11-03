@@ -113,10 +113,15 @@ def get_reduced_signal(Fk, f, sig_len=0):
         signal - reduced time series"""
     
     if sig_len == 0 or sig_len < max(f):
-        sig_len = max(f)
+        sig_len = int(max(f))*200
+        """max(f) is limited by window size - wavelength of 1/2 the windowsize is the largest observable frequency. Each point of the wavelength corresponds to 1/100 of a second, so max freqency times 100 corresponds to at max, half of the window size."""
     
     signal = np.fft.irfft(Fk, sig_len)
         
+
+    """
+    reduced signal will be transformed via fft, then passed to kld
+    """
         
 def kld(Fk, freq, Fk_red, f_red):
     """Caclulate the Kullback-Leibler divergence between two signals """
