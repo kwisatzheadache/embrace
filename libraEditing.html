@@ -1,0 +1,458 @@
+<html lang="en"><head>
+        <meta charset="utf-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Balance Keeping Sensor</title>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <!-- CSS Files -->
+        <link href="./assets/css/style.css" rel="stylesheet">
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet">
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="./assets/css/demo.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
+    <script async="" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script><script async="" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script><script async="" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script><script async="" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script><style>.shopify-buy-modal-is-active {
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shopify-buy-frame {
+  display: inline-block
+}
+
+.shopify-buy-frame iframe {
+  width: 100%;
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.shopify-buy-frame--cart {
+  width: 100%;
+  max-width: 350px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 2147483647;
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%)
+}
+
+.shopify-buy-frame--cart iframe {
+  height: 100%;
+}
+
+.shopify-buy-frame--cart.is-initialized {
+  -webkit-transition: all 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.shopify-buy-frame--cart.is-active {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+.shopify-buy-frame--product {
+  display: block
+}
+
+.shopify-buy-frame--product.shopify-buy__layout-horizontal {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shopify-buy-frame--product.shopify-buy__layout-horizontal iframe {
+  max-width: 100%;
+}
+
+@media (min-width: 950px) {
+
+  .shopify-buy-frame--product.shopify-buy__layout-horizontal iframe {
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.shopify-buy-frame--toggle {
+  display: inline-block
+}
+
+.shopify-buy-frame--toggle:not(.is-sticky) {
+  overflow: hidden;
+  padding: 5px;
+}
+
+.shopify-buy-frame--toggle.is-sticky {
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  z-index: 2147483645;
+}
+
+.shopify-buy-frame--toggle.is-active.is-sticky {
+  display: block;
+}
+
+.is-active {
+}
+
+.is-active .shopify-buy-frame--toggle {
+}
+
+.is-active .shopify-buy-frame--toggle iframe {
+  min-height: 67px;
+}
+
+.shopify-buy-frame--productSet {
+  width: 100%;
+}
+
+.shopify-buy-frame--modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2147483646;
+  display: none;
+  -webkit-transition: background 300ms ease;
+  transition: background 300ms ease
+}
+
+.shopify-buy-frame--modal iframe {
+  height: 100%;
+  width: 100%;
+  max-width: none;
+}
+
+.shopify-buy-frame--modal.is-active {
+  background: rgba(0, 0, 0, .6);
+}
+
+.shopify-buy-frame--modal.is-block {
+  display: block;
+}
+</style><style type="text/css"></style><style type="text/css">.typeform-popup-overlay{visibility:visible;opacity:1;-webkit-transition:opacity .2s ease-in;transition:opacity .2s ease-in;background:rgba(0,0,0,.85);position:fixed;left:0;top:0;right:0;bottom:0;z-index:10000;min-height:100%}.typeform-popup-overlay.appearing{visibility:hidden;opacity:0}.typeform-popup-overlay.is-contained{position:absolute;overflow:hidden}.typeform-popup-wrapper{position:fixed;top:0;height:100%;max-width:100%;z-index:10001}.typeform-popup-wrapper.typeform-popup-mode-popup{visibility:hidden;opacity:0;width:calc(100vw - 80px);height:calc(100vh - 80px);top:40px;left:40px;-webkit-transition:opacity .3s ease-out;transition:opacity .3s ease-out}.typeform-popup-wrapper.typeform-popup-mode-popup.typeform-popup-wrapper-open{visibility:visible;opacity:1}.typeform-popup-wrapper.typeform-popup-mode-drawer_left{-webkit-transition:left .4s ease-out;transition:left .4s ease-out}.typeform-popup-wrapper.typeform-popup-mode-drawer_right{-webkit-transition:right .4s ease-out;transition:right .4s ease-out}.typeform-popup-wrapper.typeform-popup-mode-drawer_left.typeform-popup-wrapper-open,.typeform-popup-wrapper.typeform-popup-mode-drawer_right.typeform-popup-wrapper-open{display:block}.typeform-popup-wrapper.typeform-popup-mode-popup.is-contained{position:absolute;width:calc(100% - 80px);height:calc(100% - 80px)}.typeform-popup-wrapper.typeform-popup-mode-drawer_left.is-contained,.typeform-popup-wrapper.typeform-popup-mode-drawer_right.is-contained{position:absolute;height:100%}.typeform-popup-wrapper .typeform-close-icon{position:absolute;top:12px;right:-38px;padding:8px;cursor:pointer}.typeform-popup-wrapper iframe{width:100%;height:100%;border:0}.typeform-popup-wrapper.typeform-popup-mode-popup iframe{border-radius:0;-webkit-mask-image:-webkit-radial-gradient(circle,#fff,#000);-webkit-transform:translateZ(0)}.typeform-popup-wrapper.typeform-popup-mode-popup .typeform-close-icon{top:-34px;right:-34px}.typeform-popup-wrapper.typeform-popup-mode-drawer_right .typeform-close-icon{left:-38px;right:auto}</style><style type="text/css">.typeform-modal{visibility:hidden;opacity:0;position:fixed;z-index:1000;left:0;right:0;top:0;bottom:0;height:100%;overflow:hidden;-webkit-transition:all .4s ease;transition:all .4s ease}.typeform-modal .typeform-close{position:absolute;z-index:1001;top:0;right:0;font-size:20px;font-family:sans-serif;width:50px;height:50px}.typeform-modal .typeform-close span{border-radius:0;display:block;height:2px;width:25px;position:absolute;right:6px;top:6px}.typeform-modal .typeform-close span:first-child{-webkit-transform:translateY(13px) rotate(-135deg);transform:translateY(13px) rotate(-135deg)}.typeform-modal .typeform-close span:last-child{-webkit-transform:translateY(13px) rotate(-45deg);transform:translateY(13px) rotate(-45deg)}.typeform-modal iframe{border:0;width:100%;height:100%}.typeform-mobile-modal-open{overflow:hidden!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important}</style><style type="text/css">.typeform-widget{position:relative}.typeform-widget .typeform-launcher{position:absolute;z-index:10;display:block;left:0;right:0;top:0;bottom:0}.typeform-widget .typeform-title{top:calc(50% - 50px);position:absolute;width:100%;display:block;font-size:30px;color:#fff;text-align:center;z-index:2;line-height:1}@media only screen and (min-width:600px){.typeform-widget .typeform-title{font-size:60px}}.typeform-widget .typeform-title img{max-height:95%}.typeform-widget .typeform-background{position:absolute;z-index:1;display:block;left:0;right:0;top:0;bottom:0}.typeform-widget .typeform-button{position:absolute;top:auto;bottom:20px;left:20px;width:calc(100% - 40px);font-size:30px;z-index:5;display:block;border-radius:3px;outline:none;height:61px;background-color:#bbb;-moz-border-radius:3px;font-weight:700;font-family:Source Sans Pro,sans-serif;overflow:hidden;-webkit-transition:background-color .1s ease-out 0ms;transition:background-color .1s ease-out 0ms;color:rgba(0,0,0,.8);border:1px solid #333;white-space:nowrap;text-overflow:ellipsis;padding-left:12px;padding-right:12px}.typeform-widget .typeform-button:active{-webkit-box-shadow:inset 0 2px 1px rgba(0,0,0,.4),inset #000 0 0 210px -100px;box-shadow:inset 0 2px 1px rgba(0,0,0,.4),inset 0 0 210px -100px #000}</style></head>
+    <body class="index-page sidebar-collapse">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-teal fixed-top navbar-orange ">
+            <div class="container">
+                <div class="navbar-translate">
+                    <a class="navbar-brand" href="" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+                        <img src="./assets/img/whiteLogoSideways.png" alt="Thumbnail Image" width="140px">
+                    </a>
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end has-image" id="navigation" style="background: url(&quot;./assets/img/blurred-image-1.jpg&quot;) 0% 0% / cover;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" onclick="openEmbraceWebsite()">
+                                <i class="now-ui-icons travel_info"></i>
+                                <p>Learn More</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://embrace-healthwear.myshopify.com/cart/2646191341607:1" style="border-radius:25px" class="nav-link btn preBtn btn-rounded" target="_blank">
+                                <p>PREORDER NOW</p>
+                            </a>
+
+                    
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/EHealthwear" target="_blank" data-original-title="Follow us on Twitter">
+                                <i class="fa fa-twitter"></i>
+                                <p class="d-lg-none d-xl-none">Twitter</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/E.healthwear" target="_blank" data-original-title="Like us on Facebook">
+                                <i class="fa fa-facebook-square"></i>
+                                <p class="d-lg-none d-xl-none">Facebook</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="wrapper">
+            <div class="page-header">
+                <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;./assets/img/header.jpg&quot;); transform: translate3d(0px, 320.667px, 0px);">
+                </div>
+                <div class="container">
+                    <div class="content-center brand mobileDown">
+                        <img class="n-logo" src="./assets/img/whiteLogo.png" alt=""><br>
+                        <img class="n-logo" width="90px" src="./assets/img/libraSensorGrey.png" alt="">
+                        <h1>Find Your Balance.</h1>
+                        <h5>The world's first balance sensing wearable</h5>
+                        <h6>25% Off, Preorder for $149.99</h6>
+                        <div id="product-component-7471212f77e-1" class="shopify-buy-frame shopify-buy-frame--product shopify-buy__layout-vertical" style="max-width: 100%;"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-product-264060174375" style="width: 100%; overflow: hidden; border: none; height: 62px;"></iframe></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="section-about-us">
+                <div class="row sectionDivider">
+                    <div class="col-lg-12 sectionDivider">
+                        <h1>How Does Libra Benefit You?</h1>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="./assets/img/content1.png" alt="Thumbnail Image" class="img-fluid">
+                        </div>
+                        <div class="col-lg-6 center-text">
+                            <div>
+                                <h1 class="title">Be Mobile with Libra</h1>
+                                <h2 class="description">Libra improves both <strong>balance</strong> and <strong>walking form</strong>.</h2>
+                                <div class="team-player">
+                                    <h5 class="description">Your balance and walking form is unique. Libra generates personalized balance fingerprints from your daily activities, allowing you to take new strides with your health.
+                                    </h5>
+                                    
+
+                                    <div id="product-component-7471212f77e-2" class="shopify-buy-frame shopify-buy-frame--product shopify-buy__layout-vertical" style="max-width: 100%;"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-product-264060174375" style="width: 100%; overflow: hidden; border: none; height: 62px;"></iframe></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <h1 class="title">Know Yourself</h1>
+                            <h2 class="description">Libra understands your movement and teaches you about yourself.</h2>
+                            <div class="team-player">
+                                <h5 class="description">Libra's intelligent design assesses your strengths and provides insights to improve posture and balance defiencies.
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="./assets/img/content2.png" alt="Thumbnail Image" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="assets/img/content3.jpg">
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <h1 class="title">Become A Better You</h1>
+                            <h2 class="description">You have goals: Libra helps you get there.</h2>
+                            <div class="team-player">
+                                <h5 class="description">Life is about growiing. Libra grows with you, providing feedback on your progress, all the way to specific days and activities.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="press">
+                <div class="row sponsors">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 sm-hidden xs-hidden">
+                        <img src="assets/img/coca.png">
+                    </div>
+                    <div class="col-lg-3 col-md-3  col-sm-3 col-xs-3 sm-hidden xs-hidden">
+                        <img src="assets/img/jacobs.png">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 sm-hidden">
+                        <img src="assets/img/nsf.png">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 xs-hidden">
+                        <img src="assets/img/Basement.png">
+                    </div>
+                </div>
+            </div>
+            -->
+            
+            <div class="success">
+                <div class="container">
+                    <div class="row">
+                        <div class="container">
+                            <h1 class="title center-text">Libra So Far?</h1>
+                            <div class="col-lg-10 center-text">
+                                <h3 class="lead">Libra's mission is to empower you with your own health. Click below to view magazines, awards, and University support that all show the promise of Libra's intelligent health wearables.</h3>
+                                <div class="team-player">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <div class="imgContainer">
+                                <img src="assets/img/tribune.jpg" alt="Avatar">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <a href="http://www.sandiegouniontribune.com/sdut-design-competition-ucsd-engineering-2016jun04-story.html">
+                                            <h5>San Diego Tribune</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Publicity</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="imgContainer">
+                                <img src="assets/img/jacobsProj.jpg" alt="Jacobs School Article">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <a href="http://jacobsschool.ucsd.edu/news/news_releases/release.sfe?id=1967">
+                                            <h5>Jacobs School Article</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Publicity</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="imgContainer">
+                                <img src="assets/img/seniorcompetition1.jpg" alt="Senior Competition">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <h5>Senior Competition</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Competition</h5>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-2 col-md-offset-2">
+                            <div class="imgContainer">
+                                <img src="assets/img/norman.jpg">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <a href="http://www.jnd.org/">
+                                            <h5>Don Norman</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Community Partner</h5>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-2 col-md-offset-2">
+                            <div class="imgContainer">
+                                <img src="assets/img/truong.jpg">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <a href="http://jacobsschool.ucsd.edu/faculty/faculty_bios/index.sfe?fmp_recid=48">
+                                            <h5> Professor Truong Nguyen</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Community Partner</h5>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-2 col-md-offset-2">
+                        <div class="imgContainer">
+                            <img src="assets/img/sdInnovation.jpg">
+                            <div class="overlay">
+                                <div class="text">
+                                    <a href="http://www.embracetech.co">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <h5>Community Partner</h5>
+                    </div>      
+                    </div>
+                </div>
+            </div>
+            <div class="contact">
+                <h1>Contact Us</h1>
+                <div class="typeform-widget" data-url="https://embracehealthwear.typeform.com/to/W6STh2" data-transparency="50" data-hide-headers="true" data-hide-footer="true" style="width: 100%; height: 500px;"><iframe width="100%" height="100%" frameborder="0" src="https://embracehealthwear.typeform.com/to/W6STh2?typeform-embed=embed-widget&amp;embed-hide-footer=true&amp;embed-hide-headers=true&amp;embed-opacity=50" style=""></iframe></div> <script id="typef_orm" src="https://embed.typeform.com/embed.js"></script><script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://www.typeform.com//?utm_campaign=W6STh2&amp;utm_source=typeform.com-10909695-Basic&amp;utm_medium=typeform&amp;utm_content=typeform-embedded-poweredbytypeform&amp;utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+                
+            </div>
+            <div class="gradient2 preOrderImage">
+                <div class=" text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 center-text">
+                                <h2 class="title" style="color:black">Walk Your Way. Walk With Libra.</h2>
+                                <div class="send-button">                                  
+                                    <div id="product-component-7471212f77e-3" class="shopify-buy-frame shopify-buy-frame--product shopify-buy__layout-vertical" style="max-width: 100%;"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-product-264060174375" style="width: 100%; overflow: hidden; border: none; height: 62px;"></iframe></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer" data-background-color="black">
+                <div class="container">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/EHealthwear" target="_blank" data-original-title="Follow us on Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                    <p class="d-lg-none d-xl-none">Twitter</p></a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/E.healthwear/" target="_blank" data-original-title="Like us on Facebook">
+                                        <i class="fa fa-facebook-square"></i>
+                                        <p class="d-lg-none d-xl-none">Facebook</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md">
+                                        Legal
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright">
+                            ©
+                            <script>
+                            document.write(new Date().getFullYear())
+                            </script>2017 Designed and Coded by
+                            <a href="https://www.alexstolzoff.com" target="_blank">Alex Stolzoff</a>.
+                        </div>
+                    </div>
+                </footer>
+            
+            <!--   Core JS Files   -->
+            <script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+            <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+            <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+            <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+            <script src="./assets/js/plugins/bootstrap-switch.js"></script>
+            <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+            <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+            <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+            <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+            <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+            <script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+            <script type="text/javascript" src="./assets/js/shopify_stuff1.js"></script>
+            <script type="text/javascript" src="./assets/js/shopify_stuff2.js"></script>
+            <script type="text/javascript" src="./assets/js/shopify_stuff3.js"></script>
+            <script type="text/javascript" src="./assets/js/shopify_stuff4.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function() {
+            // the body of this function is in assets/js/now-ui-kit.js
+            nowuiKit.initSliders();
+            });
+            function scrollToDownload() {
+            if ($('.section-download').length != 0) {
+            $("html, body").animate({
+            scrollTop: $('.section-download').offset().top
+            }, 1000);
+            }
+            }
+            function openEmbraceWebsite() {
+            var win = window.open("http://www.embracetech.co");
+            win.focus()
+            }
+            </script>
+        </div><div class="shopify-buy-frame shopify-buy-frame--toggle is-sticky" tabindex="0"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-toggle" style="width: 46px; overflow: hidden; border: none; height: 68px;"></iframe></div><div class="shopify-buy-cart-wrapper shopify-buy-frame shopify-buy-frame--cart"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-cart" style="width: 100%; overflow: hidden; border: none;"></iframe></div><div class="shopify-buy-frame shopify-buy-frame--product shopify-buy__layout-vertical" style="max-width: 100%;"><iframe horizontalscrolling="no" verticalscrolling="no" allowtransparency="true" frameborder="0" scrolling="no" name="frame-product-264060174375" style="width: 100%; overflow: hidden; border: none; height: 62px;"></iframe></div></body></html>

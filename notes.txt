@@ -1,4 +1,9 @@
 Current goal: feature engineering. Simple classification between walk/not walk to determine which features are most valid.
+
+server: 70.95.198.60
+
+look into partial amplitudes in fft
+
 To that end, anticipated work flow is as follows:
    import raw
    Binning
@@ -22,13 +27,5 @@ kld(Fk, freq, Fk_red, f_red) returns entropy between the sets. Closer to 0 = bet
 Complex numbers in frequencies - can always be reduced to abs(freq), with no regard to lost information.
 
 
-
-
-
-server: 70.95.198.60
-
-look into partial amplitudes in fft
-
-
-
-Draw out basic data flow and structure. Sit down and map out transforms, etc.
+Let's start by reducing freqencies, and testing for loss.
+Bin data, perform kullbeck-leibler, reconstruct time series with primary frequencies

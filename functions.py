@@ -64,23 +64,16 @@ def data_transform(dataset, windowsize, dom_freq_size):
     df['id'] = dataset['id']
     return(df)
 
-# def get_fft(signal):
-#     # INPUT: [N] array of values
-#     # OUTPUT: [Fk, frequ], list of coeff, list of freq values
-#     fs = 100
-#     Fk = np.fft.rfft(signal)/float(len(signal))
-#     f = np.fft.rfftfreq(len(signal), 1./fs)
-#     return Fk, f
-
-# def get_dom_freq(Fk, n_freq):
-#     # INPUT: [Fk] (list of coeff)
-#     #        n_freq (number of freq)
-#     # OUTPUT: [Ind] (list of indices of dominant frequencies)
-#     Fk_mag = np.abs(Fk)**2
-#     Fk_mag_sort = np.abs(Fk)**2
-#     Fk_mag_sort.sort()
-#     # n_freq_shape = n_freq.shape
-#     idx = np.zeros((n_freq))
-#     for i in range(n_freq):
-#         idx[i] = np.where(Fk_mag == Fk_mag_sort[-(1+i)])[0]
-#     return idx.astype(int)
+def make_bins(dataset, bin_size):
+    row, col = dataset.shape
+    if row > col:
+        dataset = dataset.transpose()
+    bins = DataFrame()
+    print dataset.shape
+    for i in range(len(dataset)):
+        binned = []
+        for j in range(int(len(dataset[i])/bin_size)):
+            print (i,j)
+            binned.append(dataset[i][j*bin_size:(j+1)*bin_size])
+        bins[i] = binned
+    return bins
