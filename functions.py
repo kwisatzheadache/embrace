@@ -77,3 +77,13 @@ def make_bins(dataset, bin_size):
             binned.append(dataset[i][j*bin_size:(j+1)*bin_size])
         bins[i] = binned
     return bins
+
+
+def run_klds(window):
+    """Test reduction efficiency buy running kld divergence between original signal and signal comprising x number of dominant frequencies"""
+    Fk, nfreq = get_fft(window)
+    for size in range(50):
+        print size
+        dom_fk, dom_fq = get_dom_freq(Fk, nfreq, size)
+        entropy = kld(Fk, nfreq, dom_fk, dom_fq)
+        print(entropy)
