@@ -148,5 +148,18 @@ def kld(Fk, freq, Fk_red, f_red):
     Fk_red_pad /= sum(Fk_red_pad)
     
     return stats.entropy(Fk_red_pad, Fk)
-            
-            
+
+def fft_to_signal(dataset, reduced_signal_length, coordinate_axes):
+    """Input:  binned fft tranforms comprising dominant frequency lists.
+    Output: reconstructed signal with specified length
+    """
+    reduced = DataFrame()
+    for i in coordinate_axes:
+        coord = []
+        for j in range(len(dataset)):
+            Fk, f = dataset[i][j]
+            signal = get_reduced_signal(Fk, f, reduced_signal_length)
+            coord.append(signal)
+        reduced[i] = coord
+        reduced['id'] = dataset['id']
+    return reduced
