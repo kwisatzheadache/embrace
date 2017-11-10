@@ -1,11 +1,10 @@
-from sklearn.neighbors import KNeighborsClassifier
-joined = pd.concat([walk, sit, stand])
-X = joined.drop(walk.columns[[0,10]], axis=1)
-Y = joined['y']
+from sklearn.cluster import KMeans
 
-neigh = KNeighborsClassifier()
-neigh.fit(X,Y)
+y_all = concat([y_walk, y_sit, y_stand], axis=0)
 
-unlabeled = random.drop(['id'], axis=1)
-predicted = neigh.predict(unlabeled)
+kmeans = KMeans(n_clusters=3)
+X = y_all[coords]
+X = np.array(X)
 
+kmeans.fit(X)
+predicts = kmeans.predict(X)

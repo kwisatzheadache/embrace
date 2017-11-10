@@ -35,3 +35,14 @@ y_stand = label_y(dom_stand, stand_label)
 """------------------ REDUCE SIGNALS -------------------"""
 red_walk = fft_to_signal(dom_walk, 50, coords)
 
+def w_avg(dataset):
+    array = []
+    for i in range(len(dataset)):
+        for j in range(len(dataset[i])):
+            Fk, n_freq = dataset[i,j]
+            avg = []
+            for l in range(len(Fk)):
+                avg.append(abs(Fk[l]*n_freq[l]))
+            w_avg = avg/len(avg)
+    col = []
+
