@@ -87,3 +87,21 @@ def run_klds(window):
         dom_fk, dom_fq = get_dom_freq(Fk, nfreq, size)
         entropy = kld(Fk, nfreq, dom_fk, dom_fq)
         print(entropy)
+
+def get_mags(dataset):
+    mag_acc = []
+    mag_mag = []
+    for i in range(len(dataset)):
+        xa = (dataset['acc_x'][i])
+        ya = (dataset['acc_y'][i])
+        za = (dataset['acc_z'][i])
+        xm = (dataset['mag_x'][i])
+        ym = (dataset['mag_y'][i])
+        zm = (dataset['mag_z'][i])
+        acc = (xa**2+ya**2+za**2)**1/2
+        grav = acc - 9.2
+        mag = (xm**2+ym**2+zm**2)**1/2
+        mag_acc.append(grav)
+        mag_mag.append(mag)
+    return[mag_acc, mag_mag]
+    
