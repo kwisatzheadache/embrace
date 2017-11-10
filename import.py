@@ -21,31 +21,31 @@ reduced_sig_len = 50
 """----------------- TRANSFORM DATA ------------------"""
 """ Windows are created, window_size=100. fft transform on all windows, retaining 33 most dominant signals."""
 dom_walk = data_transform(walk, window, freq)
-dom_sit = data_transform(sit, window, freq)
-dom_stand = data_transform(stand, window, freq)
+# dom_sit = data_transform(sit, window, freq)
+# dom_stand = data_transform(stand, window, freq)
 
-dom_stand_sit = data_transform(stand_sit, window, freq)
-dom_random = data_transform(random, window, freq)
+# dom_stand_sit = data_transform(stand_sit, window, freq)
+# dom_random = data_transform(random, window, freq)
 
 """----------------- LABEL Y-VALUES --------------------""" 
 # Has y-values
 y_walk = label_y(dom_walk, walk_label)
-y_sit = label_y(dom_sit, sit_label)
-y_stand = label_y(dom_stand, stand_label)
+# y_sit = label_y(dom_sit, sit_label)
+# y_stand = label_y(dom_stand, stand_label)
 
 """------------------ REDUCE SIGNALS -------------------"""
-red_walk = fft_to_signal(dom_walk, 50, coords)
+# red_walk = fft_to_signal(dom_walk, 50, coords)
 
-X_walk = []
+# X_walk = []
 
-def w_avg(dataset):
-    array = []
-    for i in range(len(dataset)):
-        for j in range(len(dataset[i])):
-            Fk, n_freq = dataset[i,j]
-            avg = []
-            for l in range(len(Fk)):
-                avg.append(abs(Fk[l]*n_freq[l]))
-            w_avg = avg/len(avg)
-    col = []
+# def w_avg(dataset):
+#     array = []
+#     for i in range(len(dataset)):
+#         for j in range(len(dataset[i])):
+#             Fk, n_freq = dataset[i,j]
+#             avg = []
+#             for l in range(len(Fk)):
+#                 avg.append(abs(Fk[l]*n_freq[l]))
+#             w_avg = avg/len(avg)
+#     col = []
 
