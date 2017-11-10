@@ -99,7 +99,7 @@ def get_mags(dataset):
         ym = (dataset['mag_y'][i])
         zm = (dataset['mag_z'][i])
         acc = (xa**2+ya**2+za**2)**1/2
-        grav = acc - 9.2
+        grav = acc - 9.8
         mag = (xm**2+ym**2+zm**2)**1/2
         mag_acc.append(grav)
         mag_mag.append(mag)
