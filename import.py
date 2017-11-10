@@ -1,4 +1,5 @@
 execfile('functions.py')
+execfile('embrace_fft.py')
 
 coords = ['acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
 
@@ -34,6 +35,8 @@ y_stand = label_y(dom_stand, stand_label)
 
 """------------------ REDUCE SIGNALS -------------------"""
 red_walk = fft_to_signal(dom_walk, 50, coords)
+
+X_walk = []
 
 def w_avg(dataset):
     array = []
