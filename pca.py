@@ -12,4 +12,12 @@ components = pca.components_
 
 highest = components[0]
 
-sorted = list(reversed(np.argsort(highest))) 
+
+for i in components:
+    sorted = list(reversed(np.argsort(i)))
+    weights = {}
+    for j in range(10):
+        weights[sorted[j]] = i[sorted[j]] 
+    # print (i[sorted[:10]], sorted[:10])
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(weights)
