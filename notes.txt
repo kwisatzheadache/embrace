@@ -1,31 +1,8 @@
-Current goal: feature engineering. Simple classification between walk/not walk to determine which features are most valid.
-
 server: 70.95.198.60
 
-look into partial amplitudes in fft
 
-To that end, anticipated work flow is as follows:
-   import raw
-   Binning
-      fft transform 
-      dominant freqs and coeffs
-      weighted average of bin
-      average magnitudes of 3 inputs
-      max amplitude (calculated from raw)
-
-   ...
-   Shape of input is 2D, so (45, 3000) is acceptable
-
-Benefits/drawbacks to binning vs windows
-
-What is kullback-leibler divergence?
-     Kullback-Leibler divergence computes the loss of information between the full frequency signal and the reduced frequency signal.
-
-kld(Fk, freq, Fk_red, f_red) returns entropy between the sets. Closer to 0 = better.
-
-
-Complex numbers in frequencies - can always be reduced to abs(freq), with no regard to lost information.
-
-
-Let's start by reducing freqencies, and testing for loss.
-Bin data, perform kullbeck-leibler, reconstruct time series with primary frequencies
+Goal: run PCA on entire directory
+	-Directory contains .csv files
+	-Open each file individually, create windows/features
+	-Stack imported data sets (rather than concatenating csv files)
+	-Run PCA on master dataset
