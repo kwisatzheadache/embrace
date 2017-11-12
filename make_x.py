@@ -15,22 +15,25 @@ for i in df.columns:
     n_freqs = []
     for j in range(len(df[i])):
         Fk, n_freq = df[i][j]
+        Fk = abs(Fk)
         Fks.append(Fk)
         n_freqs.append(n_freq)
 
     df[i+'coeffs'] = Fks
     df[i+'n_freqs'] = n_freqs
 
-acc_mag, mag_mag = get_mags(dom_walk)
 
 X_walk = DataFrame()
-X_walk[coords] = df[coords]
-X_walk['acc_mag'] = acc_mag
-X_walk['mag_mag'] = mag_mag
+# X_walk[coords] = df[coords]
+X_walk['acc_mag'] = dom_walk['acc_mag']
+X_walk['mag_mag'] = dom_walk['mag_mag']
 
 expandable = df.drop(coords, axis=1)
 
+columns = X_walk.columns
 X_walk = np.array(X_walk)
+array_lengths = []
 for i in expandable.columns:
     arrays = np.array([np.array(x) for x in expandable[i]])
+    array_lengths.append(len(arrays))
     X_walk = np.hstack([X_walk, arrays])
