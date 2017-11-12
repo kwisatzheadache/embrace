@@ -6,3 +6,5 @@ Goal: run PCA on entire directory
 	-Open each file individually, create windows/features
 	-Stack imported data sets (rather than concatenating csv files)
 	-Run PCA on master dataset
+
+Bring whiteboard
