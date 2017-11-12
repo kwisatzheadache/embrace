@@ -30,7 +30,10 @@ X_walk['mag_mag'] = dom_walk['mag_mag']
 
 expandable = df.drop(coords, axis=1)
 
+columns = X_walk.columns
 X_walk = np.array(X_walk)
+array_lengths = []
 for i in expandable.columns:
     arrays = np.array([np.array(x) for x in expandable[i]])
+    array_lengths.append(len(arrays))
     X_walk = np.hstack([X_walk, arrays])
