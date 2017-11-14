@@ -1,9 +1,12 @@
 from sklearn.decomposition import PCA
 
-# for i in range(10):
-#     pca = PCA(n_components = i)
-#     pca.fit(X_walk)
-#     print pca.explained_variance_ratio_
+"""
+Goal: run PCA on entire directory
+	-Directory contains .csv files
+	-Open each file individually, create windows/features
+	-Stack imported data sets (rather than concatenating csv files)
+	-Run PCA on master dataset
+"""
 
 pca = PCA(n_components = 10)
 pca.fit(X_walk)
