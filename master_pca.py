@@ -29,8 +29,8 @@ def generate_features(filename):
     doms = doms.drop(coords, axis=1)
     columns = data.columns
     X_data = np.array(data)
-    for i in doms.columns:
+    for i in doms.columns[9:]:
         arrays = np.array([np.array(x) for x in doms[i]])
-        X_walk = np.hstack([X_data, arrays])
+        X_data = np.hstack([X_data, arrays])
     return X_data
 
