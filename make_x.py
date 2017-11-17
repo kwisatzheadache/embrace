@@ -1,4 +1,3 @@
-execfile('import.py')
 
 """
 X_walk is a 2d input vector with shape (30081, 605). It comprises the raw motion data, 33 dominant freqs and coeffs for each axis, and magnitude data.
@@ -8,7 +7,7 @@ moving average
 binned average
 bin reduced, recreated signal
 """
-df = DataFrame(dom_walk[coords])
+df = DataFrame(doms[coords])
 
 for i in df.columns:
     Fks = []
@@ -25,8 +24,8 @@ for i in df.columns:
 
 X_walk = DataFrame()
 # X_walk[coords] = df[coords]
-X_walk['acc_mag'] = dom_walk['acc_mag']
-X_walk['mag_mag'] = dom_walk['mag_mag']
+X_walk['acc_mag'] = doms['acc_mag']
+X_walk['mag_mag'] = doms['mag_mag']
 
 expandable = df.drop(coords, axis=1)
 

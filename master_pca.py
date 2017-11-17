@@ -1,5 +1,7 @@
 import sys
 
+execfile('functions.py')
+
 # csv_directory = sys.argv[1]
 window = 100
 num_freqs = 33
@@ -34,3 +36,4 @@ def generate_features(filename):
         X_data = np.hstack([X_data, arrays])
     return X_data
 
+walk = generate_features('./data/walk.csv')
