@@ -1,4 +1,5 @@
 from sklearn.decomposition import PCA
+import pprint
 
 """
 Goal: run PCA on entire directory

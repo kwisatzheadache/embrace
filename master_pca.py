@@ -1,4 +1,6 @@
 import sys
+from sklearn.decomposition import PCA
+import pprint
 
 execfile('functions.py')
 
@@ -30,10 +32,25 @@ def generate_features(filename):
         doms[i+'n_freqs'] = n_freqs
     doms = doms.drop(coords, axis=1)
     columns = data.columns
-    X_data = np.array(data)
+    X_data = np.array(data[:][window:])
     for i in doms.columns[9:]:
         arrays = np.array([np.array(x) for x in doms[i]])
         X_data = np.hstack([X_data, arrays])
     return X_data
 
-walk = generate_features('./data/walk.csv')
+
+
+def run_pca(data):
+    pca = PCA(n_components = 10)
+    pca.fit(data)
+    variance_ratio = pca.explained_variance_ratio_
+    components = pca.components_
+    highest = components[0]
+    for i in components:
+        sorted = list(reversed(np.argsort(i)))
+        weights = {}
+        for j in range(10):
+            weights[sorted[j]] = i[sorted[j]] 
+        # print (i[sorted[:10]], sorted[:10])
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(weights)
