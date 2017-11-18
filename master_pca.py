@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 
 execfile('functions.py')
 
-# csv_directory = sys.argv[1]
+csv_directory = sys.argv[1]
 window = 100
 num_freqs = 33
 
@@ -60,6 +60,6 @@ def run_pca(data):
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(weights)
 
-# stacked = stack(csv_directory)
-# run_pca(stacked)
+stacked = stack(csv_directory)
+run_pca(stacked)
 
