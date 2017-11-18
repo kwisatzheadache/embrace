@@ -5,18 +5,12 @@ from sklearn.decomposition import PCA
 
 execfile('functions.py')
 
-# csv_directory = sys.argv[1]
+csv_directory = sys.argv[1]
 window = 100
 num_freqs = 33
 
-# masterset = []
-# for filename in os.listdir(csv_directory):
-#     features = generate_features(filename, window, doms)
-#     masterset.append(features)
-
-# pca = run_pca(masterset)
-
 def generate_features(filename):
+    print('generating features for ' + filename)
     data = get_nx10(filename)
     doms = data_transform(data, window, num_freqs)
     coords = doms.columns[:9]
@@ -37,8 +31,17 @@ def generate_features(filename):
     for i in doms.columns[9:]:
         arrays = np.array([np.array(x) for x in doms[i]])
         X_data = np.hstack([X_data, arrays])
+    print('features generated for ' + filename)
     return X_data
 
+def stack(dir):
+    files = os.listdir(dir)
+    csvs = []
+    for x in files:
+        if '.csv' in x:
+            csvs.append(x)
+    complete = [np.vstack([generate_features(dir+'/'+x) for x in csvs])]
+    return complete
 
 def run_pca(data):
     pca = PCA(n_components = 10)
@@ -55,7 +58,6 @@ def run_pca(data):
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(weights)
 
-def stack(dir):
-    files = os.listdir(dir)
-    complete = [np.vstack([generate_features(dir+'/'+x) for x in files])]
+stacked = stack(csv_directory)
+run_pca(stacked)
 
