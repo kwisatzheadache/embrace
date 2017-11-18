@@ -41,7 +41,7 @@ def stack(dir):
     for x in files:
         if '.csv' in x:
             csvs.append(x)
-    complete = [np.vstack([generate_features(dir+'/'+x) for x in csvs])]
+    complete = np.vstack([generate_features(dir+'/'+x) for x in csvs])
     return complete
 
 def run_pca(data): 
@@ -55,7 +55,7 @@ def run_pca(data):
         sorted = list(reversed(np.argsort(i)))
         weights = {}
         for j in range(10):
-            weights[sorted[j]] = i[sorted[j]] 
+            weights[sorted[j]] = round(i[sorted[j]], 5)
         # print (i[sorted[:10]], sorted[:10])
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(weights)
