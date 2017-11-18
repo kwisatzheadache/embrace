@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 
 execfile('functions.py')
 
-csv_directory = sys.argv[1]
+# csv_directory = sys.argv[1]
 window = 100
 num_freqs = 33
 
@@ -32,6 +32,7 @@ def generate_features(filename):
         arrays = np.array([np.array(x) for x in doms[i]])
         X_data = np.hstack([X_data, arrays])
     print('features generated for ' + filename)
+    print(X_data.shape)
     return X_data
 
 def stack(dir):
@@ -43,7 +44,8 @@ def stack(dir):
     complete = [np.vstack([generate_features(dir+'/'+x) for x in csvs])]
     return complete
 
-def run_pca(data):
+def run_pca(data): 
+    print(data.shape)
     pca = PCA(n_components = 10)
     pca.fit(data)
     variance_ratio = pca.explained_variance_ratio_
@@ -58,6 +60,6 @@ def run_pca(data):
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(weights)
 
-stacked = stack(csv_directory)
-run_pca(stacked)
+# stacked = stack(csv_directory)
+# run_pca(stacked)
 
