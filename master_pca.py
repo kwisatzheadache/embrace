@@ -1,6 +1,7 @@
+import os
 import sys
-from sklearn.decomposition import PCA
 import pprint
+from sklearn.decomposition import PCA
 
 execfile('functions.py')
 
@@ -39,7 +40,6 @@ def generate_features(filename):
     return X_data
 
 
-
 def run_pca(data):
     pca = PCA(n_components = 10)
     pca.fit(data)
@@ -54,3 +54,8 @@ def run_pca(data):
         # print (i[sorted[:10]], sorted[:10])
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(weights)
+
+def stack(dir):
+    files = os.listdir(dir)
+    complete = [np.vstack([generate_features(dir+'/'+x) for x in files])]
+
