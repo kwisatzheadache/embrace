@@ -10,27 +10,3 @@ Goal: run PCA on entire directory
 Bring whiteboard
 
 
-Step 1:
-python executable...
-`python pca.py ./csv_directory`
-
-Iterate over each csv:
-        make windows, feature set
-Combine datasets
-        stack feature engineered data set
-Run PCA on combined dataset
-
-receive arguments:
-arg is directory
-    for each csv file in directory...
-        feature set
-        return dataset_i
-
-
-
-I need to automate the importing, and feature engineering.
-Module that imports, transforms, returns feature set.
-
-Module that combines feature sets.
-
-Module that runs PCA
