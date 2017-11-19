@@ -9,7 +9,13 @@ csv_directory = sys.argv[1]
 window = 100
 num_freqs = 33
 
-def generate_features(filename):
+def generate_features(filename, window=100):
+    ''' Receives nx10 csv file.
+    Transforms data into windows according to pre-declared window size, performs fourier transform, keeps only the dominant frequencies, and creates magnitude values for the acc and mag.
+
+    Output is array shape (x, 409). 
+
+    '''
     print('generating features for ' + filename)
     data = get_nx10(filename)
     doms = data_transform(data, window, num_freqs)
@@ -36,6 +42,8 @@ def generate_features(filename):
     return X_data
 
 def stack(dir):
+    ''' Receives directory of csv files. Generates features on all of them, then stacks the output in shape (x, 409), in preparation for global PCA.
+    '''
     files = os.listdir(dir)
     csvs = []
     for x in files:
@@ -45,6 +53,7 @@ def stack(dir):
     return complete
 
 def run_pca(data): 
+    ''' Runs PCA analysis on dataset. Prints top ten weights for ten components.'''
     print(data.shape)
     pca = PCA(n_components = 10)
     pca.fit(data)
