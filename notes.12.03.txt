@@ -1,0 +1,58 @@
+Extraction first and foremost
+
+
+move to demo with longitudinal tracking
+no classifiers
+autocorrelation to detet walk cycles
+metric calculations from walk cycles
+
+demo - patient comes in walks
+demo shows walks, along with comparison to previous walks, 
+in a graph
+
+need to pull from database.... 
+
+
+Code that needs to be wrrite
+walk cycle detection w/ autocorrelation
+more periodicity for walk than anything else
+step frequency, stride lenghth estimated from there
+
+walk cycle extraction
+
+metrics
+stride frequency 
+symmetry 
+stride length
+
+
+First:
+walk cycle detection
+lag
+offest
+multyiply
+normalize
+
+fft
+multiply by complex conjugate
+tranform back out
+
+
+peak detection
+space between
+variance between peaks and autocorrelation intself
+
+
+show that autocorrelation is periodic
+
+
+output of auto-corr function on a window is a score of the quality of its periodicity
+to use as indicator of walk-cycle/non-walk-cycle
+
+
+
+Real number one:
+find sections of data where rotation as determined by magnetometer is less than some threshold
+to find relatively straight walk cycles
+where magnitometer is fairly straight
+threshold in degrees
