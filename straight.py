@@ -27,29 +27,8 @@ mag_z = complete[:,9]
 for x in [mag_x, mag_y, mag_z]:
     print(stats.describe(x))
 
-# mag_z has the highest variance. Presumably, this indicates it corresponds most with walk orientation.
+# Need to separate walks into chunks, where all mag_z values are within .1 of the average.
+# Perhaps use std deviation of chunks... Where std < .05?
+# Make windows... std of windows?
 
-# walk.shape
-# walk.columns
-# plt.plot(walk['mag_x'])
-# plt.show
-# walk['mag_x']
-# walk.values
-# walk['mag_x'].values
-# vals = _
-# vals
-# vals.shape
-# plt.plot(vals)
-# plt.show()
-# plt.plot(vals)
-# plt.show()
-# x = walk['mag_x'].values
-# y = walk['mag_y'].values
-# z = walk['mag_z'].values
-# coords = [x,y,z]
-# plt.plot(y)
-# plt.show()
-# plt.plot(z)
-# plt.show()
-# import readline
-# readline.write_history_file('./repl_history_12_02.py')
+lagged = lag(mag_z, 100)
