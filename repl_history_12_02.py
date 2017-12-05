@@ -1,8 +1,18 @@
 execfile('functions.py')
-walk = get_nx10('./data/walk.csv')
+import matplotlib.pyplot as plt
+
+def stack_walks(direc):
+    files = os.listdir(direc)
+    csvs = []
+    for x in files:
+        if '.csv' in x:
+            csvs.append(x)
+    complete = np.vstack([get_nx10(direc+'/'+x) for x in csvs])
+    return complete
+
+complete = stack_walks('./demo_data/walk/ryan')
 walk.shape
 walk.columns
-import matplotlib.pyplot as plt
 plt.plot(walk['mag_x'])
 plt.show
 walk['mag_x']

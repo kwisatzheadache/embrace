@@ -36,10 +36,10 @@ def generate_features(filename, window=100):
         X_data = np.hstack([X_data, arrays])
     return X_data
 
-def stack(dir):
+def stack(direc):
     ''' Receives directory of csv files. Generates features on all of them, then stacks the output in shape (x, 409), in preparation for global PCA.
     '''
-    files = os.listdir(dir)
+    files = os.listdir(direc)
     csvs = []
     for x in files:
         if '.csv' in x:
