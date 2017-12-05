@@ -1,9 +1,13 @@
 import matplotlib.pyplot as plt
 import os
+import scipy.stats as stats
 
 execfile('functions.py')
 
 def stack_walks(direc):
+    """
+    Gather all csv's from a directory and stack them into one array
+    """
     files = os.listdir(direc)
     csvs = []
     for x in files:
@@ -14,9 +18,17 @@ def stack_walks(direc):
 
 complete = stack_walks('./demo_data/walk/ryan')
 
+# Grab the individual magnetometer readings
 mag_x = complete[:,7]
 mag_y = complete[:,8]
 mag_z = complete[:,9]
+
+# Print descriptive statistics
+for x in [mag_x, mag_y, mag_z]:
+    print(stats.describe(x))
+
+# mag_z has the highest variance. Presumably, this indicates it corresponds most with walk orientation.
+
 # walk.shape
 # walk.columns
 # plt.plot(walk['mag_x'])
