@@ -32,3 +32,15 @@ for x in [mag_x, mag_y, mag_z]:
 # Make windows... std of windows?
 
 lagged = lag(mag_z, 100)
+
+rotation = .03
+
+straight = []
+for i in lagged:
+    avg = np.mean(i)
+    low = avg - rotation
+    high = avg + rotation
+    if all(low <= j <= high for j in i):
+        straight.append(i)
+
+print(np.array(straight).shape)
