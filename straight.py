@@ -16,7 +16,7 @@ def stack_walks(direc):
     complete = np.vstack([get_nx10(direc+'/'+x) for x in csvs])
     return complete
 
-def return_straight_walk(walk_input, angle):
+def straight_walk(walk_input, angle):
     """
     Input: walk_directory, angle
     Alternately, instead of directory, use nx10 data in np.array
