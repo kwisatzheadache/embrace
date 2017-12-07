@@ -95,6 +95,7 @@ def run_klds(window):
 def get_mags(dataset):
     mag_acc = []
     mag_mag = []
+    mag_gy = []
     for i in range(len(dataset)):
         xa = (dataset['acc_x'][i])
         ya = (dataset['acc_y'][i])
@@ -102,12 +103,17 @@ def get_mags(dataset):
         xm = (dataset['mag_x'][i])
         ym = (dataset['mag_y'][i])
         zm = (dataset['mag_z'][i])
+        xg = (dataset['gy_x'][i])
+        yg = (dataset['gy_y'][i])
+        zg = (dataset['gy_z'][i])
         acc = (xa**2+ya**2+za**2)**1/2
         grav = acc - 9.8
         mag = (xm**2+ym**2+zm**2)**1/2
+        gy = (xg**2+yg**2+zg**2)**1/2
         mag_acc.append(grav)
         mag_mag.append(mag)
-    return[mag_acc, mag_mag]
+        mag_gy.append(gy)
+    return[mag_acc, mag_mag, mag_gy]
     
 import numpy as np
 import scipy.stats as stats
