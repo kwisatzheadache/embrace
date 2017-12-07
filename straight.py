@@ -28,7 +28,7 @@ def straight_walk(walk_input, angle):
         walks = stack_walks(walk_input)
     else:
         walks = walk_input
-    df = pd.DataFrame(walks[100:])
+    array = np.array(walks[100:])
     mag_z = walks[:,9]
     lagged = lag(mag_z, 100)
     straight = []
@@ -37,5 +37,5 @@ def straight_walk(walk_input, angle):
         low = avg - rotation
         high = avg + rotation
         if all(low <= j <= high for j in lagged[i]):
-            straight.append(df.iloc[[i]])
+            straight.append(array[i])
     return np.array(straight)
