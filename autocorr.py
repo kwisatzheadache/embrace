@@ -1,6 +1,9 @@
-def autocorr(walk):
-    norm = walk - np.mean(walk)
-    result = np.correlate(norm, norm, mode='full')
-    acorr = result[result.size/2:]
-    acorr /= ( walk.var() * np.arange(walk.size, 0, -1))
-    return acorr
+execfile('straight.py')
+
+dire = './demo_data/walk/ryan'
+
+straight = straight_walk(dire, 15)
+
+one = straight[2230:2700]
+
+mag_z = one[:,9]
