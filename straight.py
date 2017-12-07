@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import os
 import scipy.stats as stats
+import pandas as pd
 
 execfile('functions.py')
 
@@ -27,13 +28,14 @@ def straight_walk(walk_input, angle):
         walks = stack_walks(walk_input)
     else:
         walks = walk_input
+    df = pd.DataFrame(walks[100:])
     mag_z = walks[:,9]
     lagged = lag(mag_z, 100)
     straight = []
-    for i in lagged:
-        avg = np.mean(i)
+    for i in range(len(lagged)):
+        avg = np.mean(lagged[i])
         low = avg - rotation
         high = avg + rotation
-        if all(low <= j <= high for j in i):
-            straight.append(i)
+        if all(low <= j <= high for j in lagged[i]):
+            straight.append(df.iloc[[i]])
     return np.array(straight)
