@@ -1,0 +1,13 @@
+Keep board unplugged
+
+Connect to power
+Connect to computer
+
+Aruduino file is in ~/Arduino.../sketchets/simple_stream
+Check that IDE recognize arduino in port
+Change wifi/password
+Upload change to arduino board
+
+listen_and_dump
+
+nc -l 7014 (port number)
