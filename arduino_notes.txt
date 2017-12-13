@@ -8,6 +8,9 @@ Check that IDE recognize arduino in port
 Change wifi/password
 Upload change to arduino board
 
-listen_and_dump
+in home directory, run ./listen_and_dump
+it should connect to server and send data there. unless server is turned off. 
+
+Does nc -l 7014 work is server is turned off?
 
 nc -l 7014 (port number)
