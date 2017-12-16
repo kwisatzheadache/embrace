@@ -32,24 +32,7 @@ def straight_walk(walk_input, angle):
     mag_z = walks[:,9]
     lagged = lag(mag_z, 100)
     straight = []
-    chunk = []
     for i in range(len(lagged)):
-        avg = np.mean(lagged[i])
-        low = avg - rotation
-        high = avg + rotation
-        if all(low <= j <= high for j in lagged[i]):
-            chunk.append(array[i])
-        else:
-            straight.append([chunk])
-            chunk = []
-    return np.array(straight)
-
-def chunk_walks(walks):
-    """
-    """
-    chunks = []
-    mag_z = walks[:,9]
-    for i in range(len(mag_z)):
         avg = np.mean(lagged[i])
         low = avg - rotation
         high = avg + rotation
