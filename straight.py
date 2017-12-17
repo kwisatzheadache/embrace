@@ -70,3 +70,24 @@ def loop_over_index(index, acc1, longest):
                 loop_over_index(index[1:], [], acc1)
             else:
                 loop_over_index(index[1:], [], longest)
+
+
+def while_loop(index):
+    counter = range(len(index))
+    acc1 = []
+    longest = []
+    while len(index) > 2:
+        i = index[0]
+        j = index[1]
+        count = counter[0]
+        index.pop(0)
+        counter.pop(0)
+        if abs(i - j) < .01:
+            acc1.append(count)
+        else:
+            if len(acc1) >= len(longest):
+                longest = list(acc1)
+                acc1 = []
+            else:
+                acc1 = []
+    return longest
