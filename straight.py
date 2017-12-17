@@ -42,37 +42,10 @@ def straight_walk(walk_input, angle):
             index.append(avg)
     return np.array(straight), index
 
-def index_to_keep(index, acc=[]):
-    if abs(index[0] - index[1]) < .01:
-        acc.append(index[0])
-    # lagged = lag(index, 2)
-    # long1 = []
-    # for i in range(len(lagged)):
-    #     j, k = i
-    #     if abs(j - k) < .01:
-    #         long1.apend(i)
-    #     else:
-
-
-def loop_over_index(index, acc1, longest):
-    if len(index) < 2:
-        print('here')
-        output = longest
-        return(output)
-    else:
-        i = index[0]
-        j = index[1]
-        if abs(i - j) < .01:
-            acc1.append(index[0])
-            loop_over_index(index[1:], acc1, longest)
-        else:
-            if len(acc1) >= len(longest):
-                loop_over_index(index[1:], [], acc1)
-            else:
-                loop_over_index(index[1:], [], longest)
-
-
-def while_loop(index):
+def longest_walk(straights, index):
+    """
+    Returns the single, longest walk from a series of walks. Could probably also use non-walks input.
+    """
     counter = range(len(index))
     acc1 = []
     longest = []
@@ -90,4 +63,4 @@ def while_loop(index):
                 acc1 = []
             else:
                 acc1 = []
-    return longest
+    return straights[[longest]]
