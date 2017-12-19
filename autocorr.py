@@ -1,11 +1,5 @@
-execfile('straight.py')
+execfile('functions.py')
 
-def make_auto(feature):
-    series = pd.Series(feature)
-    auto = []
-    for i in range(500):
-        auto.append(series.autocorr(i))
-    return auto
 
 # dire = './demo_data/walk'
 straight, index = straight_walk(dire, 15)

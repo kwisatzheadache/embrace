@@ -3,6 +3,12 @@ import numpy as np
 from pandas import DataFrame
 from pandas import concat
 import sys
+import os
+import scipy.stats as stats
+import pandas as pd
+import pprint
+from sklearn.decomposition import PCA
+
 
 def get_nx10(location):
     cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
@@ -281,3 +287,129 @@ def fft_to_signal(dataset, reduced_signal_length, coordinate_axes):
         reduced[i] = coord
         reduced['id'] = dataset['id']
     return reduced
+
+def generate_features(filename, window=100):
+    ''' Receives nx10 csv file.
+    Transforms data into windows according to pre-declared window size, performs fourier transform, keeps only the dominant frequencies, and creates magnitude values for the acc and mag.
+
+    Output is array shape (x, 409). 
+
+    '''
+    print('generating features for ' + filename)
+    data = get_nx10(filename)
+    doms = data_transform(data, window, num_freqs)
+    coords = doms.columns[:9]
+    for i in coords:
+        Fks = []
+        n_freqs = []
+        for j in range(len(doms[i])):
+            Fk, n_freq = doms[i][j]
+            Fk = abs(Fk)
+            Fks.append(Fk)
+            n_freqs.append(n_freq)
+
+        doms[i+'coeffs'] = Fks
+        doms[i+'n_freqs'] = n_freqs
+    doms = doms.drop(coords, axis=1)
+    columns = data.columns
+    X_data = np.array(data[:][window:])
+    for i in doms.columns[9:]:
+        arrays = np.array([np.array(x) for x in doms[i]])
+        X_data = np.hstack([X_data, arrays])
+    return X_data
+
+def stack(direc):
+    ''' Receives directory of csv files. Generates features on all of them, then stacks the output in shape (x, 409), in preparation for global PCA.
+    '''
+    files = os.listdir(direc)
+    csvs = []
+    for x in files:
+        if '.csv' in x:
+            csvs.append(x)
+    complete = np.vstack([generate_features(dir+'/'+x) for x in csvs])
+    return complete
+
+def run_pca(data): 
+    ''' Runs PCA analysis on dataset. Prints top ten weights for ten components.'''
+    print(data.shape)
+    pca = PCA(n_components = 10)
+    pca.fit(data)
+    variance_ratio = pca.explained_variance_ratio_
+    components = pca.components_
+    highest = components[0]
+    for i in components:
+        sorted = list(reversed(np.argsort(i)))
+        weights = {}
+        for j in range(10):
+            weights[sorted[j]] = round(i[sorted[j]], 5)
+        # print (i[sorted[:10]], sorted[:10])
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(weights)
+        print(variance_ratio)
+
+def stack_walks(direc):
+    """
+    Gather all csv's from a directory and stack them into one array
+    """
+    files = os.listdir(direc)
+    csvs = []
+    for x in files:
+        if '.csv' in x:
+            csvs.append(x)
+    complete = np.vstack([get_nx10(direc+'/'+x) for x in csvs])
+    return complete
+
+def straight_walk(walk_input, angle):
+    """
+    Input: walk_directory, angle
+    Alternately, instead of directory, use nx10 data in np.array
+    Return windows where all values fall within the range of +/- rotation angle around the average.
+    """
+    rotation = (.72*angle)/360
+    if isinstance(walk_input, str):
+        walks = stack_walks(walk_input)
+    else:
+        walks = walk_input
+    array = np.array(walks[100:])
+    mag_z = walks[:,9]
+    lagged = lag(mag_z, 100)
+    straight = []
+    index = []
+    for i in range(len(lagged)):
+        avg = np.mean(lagged[i])
+        low = avg - rotation
+        high = avg + rotation
+        if all(low <= j <= high for j in lagged[i]):
+            straight.append(array[i])
+            index.append(avg)
+    return np.array(straight), index
+
+def longest_walk(straights, index):
+    """
+    Returns the single, longest walk from a series of walks. Could probably also use non-walks input.
+    """
+    counter = range(len(index))
+    acc1 = []
+    longest = []
+    while len(index) > 2:
+        i = index[0]
+        j = index[1]
+        count = counter[0]
+        index.pop(0)
+        counter.pop(0)
+        if abs(i - j) < .01:
+            acc1.append(count)
+        else:
+            if len(acc1) >= len(longest):
+                longest = list(acc1)
+                acc1 = []
+            else:
+                acc1 = []
+    return straights[[longest]]
+
+def make_auto(feature):
+    series = pd.Series(feature)
+    auto = []
+    for i in range(500):
+        auto.append(series.autocorr(i))
+    return auto
