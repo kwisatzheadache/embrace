@@ -7,7 +7,7 @@ def make_auto(feature):
         auto.append(series.autocorr(i))
     return auto
 
-dire = './demo_data/walk'
+# dire = './demo_data/walk'
 straight, index = straight_walk(dire, 15)
 longest = longest_walk(straight, index)
 
@@ -24,3 +24,6 @@ gy = make_auto(mag_gy)
 plt.plot(acc)
 plt.show()
 
+autos = []
+for i in df.columns:
+    autos.append([make_auto(i)])

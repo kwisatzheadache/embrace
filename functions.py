@@ -53,7 +53,7 @@ def data_transform(dataset, windowsize, dom_freq_size):
     windows = dataset_to_windows(dataset, windowsize)
     fft = fft_transform(windows)
     df = DataFrame()
-    acc_mag, mag_mag = get_mags(dataset)
+    acc_mag, mag_mag, mag_gy = get_mags(dataset)
     for i in range(len(fft)):
         col = []
         for j in range(len(fft[1,:])):
@@ -66,6 +66,7 @@ def data_transform(dataset, windowsize, dom_freq_size):
     diff = len(acc_mag) - len(df)
     df['acc_mag'] = acc_mag[diff:]
     df['mag_mag'] = mag_mag[diff:]
+    df['mag_gy'] = mag_gy[diff:]
     return(df)
 
 def make_bins(dataset, bin_size):
