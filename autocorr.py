@@ -1,6 +1,5 @@
 execfile('functions.py')
 
-
 # dire = './demo_data/walk'
 straight, index = straight_walk(dire, 15)
 longest = longest_walk(straight, index)
