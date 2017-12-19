@@ -7,10 +7,7 @@ def make_auto(feature):
         auto.append(series.autocorr(i))
     return auto
 
-<<<<<<< HEAD
 # dire = './demo_data/walk'
-=======
->>>>>>> ca1f1667bd388caa6d2aaa22a653d6f7088f8c71
 straight, index = straight_walk(dire, 15)
 longest = longest_walk(straight, index)
 
