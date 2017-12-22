@@ -25,3 +25,5 @@ plt.show()
 
 auto_lag0 = make_auto(reduced[0])
 auto_acc_lag0 = make_auto(lag_acc[0])
+
+

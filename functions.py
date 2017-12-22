@@ -413,3 +413,9 @@ def make_auto(feature):
     for i in range(500):
         auto.append(series.autocorr(i))
     return auto
+
+def reduce_signal(signal):
+        fft = get_fft(signal)
+        doms = get_dom_freq(fft[0], fft[1], 50)
+        reduced = get_reduced_signal(doms[0], doms[1], len(signal))
+        return reduced
