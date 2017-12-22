@@ -1,4 +1,6 @@
+from scipy.signal import find_peaks_cwt
 execfile('functions.py')
+
 
 # dire = './demo_data/walk'
 straight, index = straight_walk(dire, 15)
@@ -20,3 +22,7 @@ gy = [make_auto(mag_gy), make_auto(reduced_gy)]
 plt.plot(gy[0])
 plt.plot(gy[1])
 plt.show()
+
+indexes = find_peaks_cwt(gy[1], np.arange(1, 200))
+
+# execfile('peakdet.py')

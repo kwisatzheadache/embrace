@@ -408,9 +408,11 @@ def longest_walk(straights, index):
     return straights[[longest]]
 
 def make_auto(feature):
+    """
+    """
     series = pd.Series(feature)
     auto = []
-    for i in range(500):
+    for i in range(len(feature))):
         auto.append(series.autocorr(i))
     return auto
 
