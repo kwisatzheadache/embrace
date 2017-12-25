@@ -412,7 +412,7 @@ def make_auto(feature):
     """
     series = pd.Series(feature)
     auto = []
-    for i in range(len(feature))):
+    for i in range(len(feature)):
         auto.append(series.autocorr(i))
     return auto
 

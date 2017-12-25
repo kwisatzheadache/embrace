@@ -52,7 +52,7 @@ def peakdet(v, delta, x = None):
         this = v[i]
         if this > mx:
             mx = this
-            mxpos = x[i]
+            mxpos = i
         if this < mn:
             mn = this
             mnpos = x[i]

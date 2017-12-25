@@ -1,6 +1,6 @@
 from scipy.signal import find_peaks_cwt
 execfile('functions.py')
-
+execfile('peakdet.py')
 
 # dire = './demo_data/walk'
 straight, index = straight_walk(dire, 15)
@@ -23,6 +23,11 @@ plt.plot(gy[0])
 plt.plot(gy[1])
 plt.show()
 
-indexes = find_peaks_cwt(gy[1], np.arange(1, 200))
 
-# execfile('peakdet.py')
+maxtab, mintab = peakdet(gy[1])
+
+ind = maxtab[:, 0]
+ind = ind.astype(int)
+
+len_btw_steps = [j-i for i, j in zip(ind[:-1], ind[1:])]
+
