@@ -9,6 +9,7 @@ import pandas as pd
 import pprint
 from sklearn.decomposition import PCA
 
+execfile('peakdet.py')
 
 def get_nx10(location):
     cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
@@ -421,3 +422,23 @@ def reduce_signal(signal):
         doms = get_dom_freq(fft[0], fft[1], 50)
         reduced = get_reduced_signal(doms[0], doms[1], len(signal))
         return reduced
+
+def find_steps(walk):
+    cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
+    df = DataFrame(walk)
+    df.columns = cols
+    acc_mag, mag_mag, mag_gy = get_mags(df)
+    reduced_gy = reduce_signal(mag_gy)
+    gy = [make_auto(mag_gy), make_auto(reduced_gy)]
+    maxtab, mintab = peakdet(gy[1], .02)
+    ind = maxtab[:, 0]
+    ind = ind.astype(int)
+    len_btw_steps = [j-i for i, j in zip(ind[:-1], ind[1:])]
+    loc_and_len = zip(ind, len_btw_steps)
+    steps = []
+    for location, length in loc_and_len:
+        start = location
+        stop = location + length
+        step = longest[start:stop]
+        steps.append(step)
+    return steps
