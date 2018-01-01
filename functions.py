@@ -442,3 +442,27 @@ def find_steps(walk):
         step = longest[start:stop]
         steps.append(step)
     return steps
+
+def avg_len(steps):
+    lens = []
+    for i in steps:
+        lens.append(len(i))
+    avg = sum(lens) / float(len(lens))
+    return avg
+
+def lens(steps):
+    lens = []
+    for i in steps:
+        lens.append(len(i))
+    return lens
+
+def left_right(steps):
+    lens = lens(steps)
+    a_side = []
+    b_side = []
+    for i in range(len(lens)):
+        if i % 2 = 0:
+            a_side.append(steps[i])
+        else:
+            b_side.append(steps[i])
+    return a_side, b_side
