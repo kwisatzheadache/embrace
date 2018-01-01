@@ -1,3 +1,8 @@
 Query database for event
 Return metrics for symmetry, steps walked, avg stride length, avg stride time
 Push metrics for event to database
+
+
+Need to develop metric for all steps walked...
+will do this when I'm actually working with event pulls,
+rather than data directories.

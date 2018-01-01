@@ -457,10 +457,10 @@ def lens(steps):
     return lens
 
 def left_right(steps):
-    lens = lens(steps)
+    lengths = lens(steps)
     a_side = []
     b_side = []
-    for i in range(len(lens)):
+    for i in range(len(lengths)):
         if i % 2 == 0:
             a_side.append(steps[i])
         else:

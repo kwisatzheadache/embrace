@@ -8,16 +8,15 @@ execfile('functions.py')
 # dire = sys.argv[1]
 # output_file = sys.argv[2]
 
-straight, index = straight_walk(dire, 15)
-longest = longest_walk(straight, index)
+straights, index = straight_walk(dire, 15)
+longest = longest_walk(straights, index)
 
 steps = find_steps(longest)
 lens = lens(steps)
 
-a_side = []
-b_side = []
-for i in range(len(lens)):
-    if i % 2 = 0:
-        a_side.append(lens[i])
-    else:
-        b_side.append(lens[i])
+a, b = left_right(steps)
+
+avg_a = avg_len(a)
+avg_b = avg_len(b)
+
+ratio_ab = avg_a/float(avg_b)
