@@ -1,0 +1,3 @@
+Query database for event
+Return metrics for symmetry, steps walked, avg stride length, avg stride time
+Push metrics for event to database
