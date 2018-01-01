@@ -461,7 +461,7 @@ def left_right(steps):
     a_side = []
     b_side = []
     for i in range(len(lens)):
-        if i % 2 = 0:
+        if i % 2 == 0:
             a_side.append(steps[i])
         else:
             b_side.append(steps[i])
