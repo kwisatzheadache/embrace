@@ -339,7 +339,7 @@ def stack(direc):
     for x in files:
         if '.csv' in x:
             csvs.append(x)
-    complete = np.vstack([generate_features(dir+'/'+x) for x in csvs])
+    complete = np.vstack([generate_features(direc+'/'+x) for x in csvs])
     return complete
 
 def run_pca(data): 
@@ -434,10 +434,10 @@ def reduce_signal(signal):
     """
     Reduces signal, post fft transform. 
     """
-        fft = get_fft(signal)
-        doms = get_dom_freq(fft[0], fft[1], 50)
-        reduced = get_reduced_signal(doms[0], doms[1], len(signal))
-        return reduced
+    fft = get_fft(signal)
+    doms = get_dom_freq(fft[0], fft[1], 50)
+    reduced = get_reduced_signal(doms[0], doms[1], len(signal))
+    return reduced
 
 def find_steps(walk):
     """
