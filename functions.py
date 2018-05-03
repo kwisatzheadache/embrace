@@ -12,6 +12,9 @@ from sklearn.decomposition import PCA
 execfile('peakdet.py')
 
 def get_nx10(location):
+    """
+    Receives raw data, returns labeled dataframe
+    """
     cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
     array = np.genfromtxt(location, delimiter=",")
     df = DataFrame(array).dropna()
@@ -19,6 +22,7 @@ def get_nx10(location):
     return(df)
 
 def label_y(df, y_value):
+    # Used to label input for classification training
     y = []
     for i in range(len(df['acc_x'])):
         y.append(y_value)
@@ -37,6 +41,9 @@ def lag(variable, window):
     return np.array(df.dropna())
 
 def dataset_to_windows(dataset, windowsize):
+    """
+    Used to convert nx10 data to lagged dataset. Windowsize determines amount of lag. Typically use 100 for windosize.
+    """
     windows = []
     row, col = dataset.shape
     for i in range(col):
@@ -56,6 +63,9 @@ def fft_transform(windows):
     return np.array(arr_windows)
 
 def data_transform(dataset, windowsize, dom_freq_size):
+    """
+    Transforms nx10 data to lagged, then reduces signal to dom_freq_size, using fft_transform
+    """
     cols = dataset.columns
     windows = dataset_to_windows(dataset, windowsize)
     fft = fft_transform(windows)
@@ -77,6 +87,7 @@ def data_transform(dataset, windowsize, dom_freq_size):
     return(df)
 
 def make_bins(dataset, bin_size):
+    # Used for comparison of binning vs windows.
     row, col = dataset.shape
     if row > col:
         dataset = dataset.transpose()
@@ -101,6 +112,7 @@ def run_klds(window):
         print(entropy)
 
 def get_mags(dataset):
+    # Calculate magnitude of each sensor signal. Mag_acc is one of the best indicators of classification behavior.
     mag_acc = []
     mag_mag = []
     mag_gy = []
@@ -410,6 +422,7 @@ def longest_walk(straights, index):
 
 def make_auto(feature):
     """
+    Performs autocorrelation on selected input (feature). Used in autocorrelation graphs to determine walk cycles.
     """
     series = pd.Series(feature)
     auto = []
@@ -418,12 +431,18 @@ def make_auto(feature):
     return auto
 
 def reduce_signal(signal):
+    """
+    Reduces signal, post fft transform. 
+    """
         fft = get_fft(signal)
         doms = get_dom_freq(fft[0], fft[1], 50)
         reduced = get_reduced_signal(doms[0], doms[1], len(signal))
         return reduced
 
 def find_steps(walk):
+    """
+    Receives walk dataframe, returns location of each step, using autocorrelation of gyroscope. 
+    """
     cols = ['id', 'acc_x', 'acc_y', 'acc_z', 'gy_x', 'gy_y', 'gy_z', 'mag_x', 'mag_y', 'mag_z'] 
     df = DataFrame(walk)
     df.columns = cols
@@ -444,6 +463,9 @@ def find_steps(walk):
     return steps
 
 def avg_len(steps):
+    """
+    Calculates average length of stride, based on output from find_steps(walk)
+    """
     lens = []
     for i in steps:
         lens.append(len(i))
@@ -451,12 +473,18 @@ def avg_len(steps):
     return avg
 
 def lens(steps):
+    """
+    Returns list of stride lengths. Used to determine stride variability.
+    """
     lens = []
     for i in steps:
         lens.append(len(i))
     return lens
 
 def left_right(steps):
+    """
+    Returns list of right side and left side steps. Used in determining variance between sides and symmetry.
+    """
     lengths = lens(steps)
     a_side = []
     b_side = []
